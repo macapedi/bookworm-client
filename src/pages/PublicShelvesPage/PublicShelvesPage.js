@@ -1,5 +1,5 @@
 import React from 'react';
-import "./PublicShelves.scss";
+import "./PublicShelvesPage.scss";
 
 class PublicShelvesPage extends React.Component {
 
