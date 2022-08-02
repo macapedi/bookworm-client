@@ -1,0 +1,150 @@
+@use "./fonts" as *;
+@use "./variables" as *;
+
+@mixin mobile {
+    @media (min-width: $mobile-breakpoint) {
+        @content;
+    }
+}
+@mixin tablet() {
+    @media (min-width: $tablet-breakpoint) {
+        @content;
+    }
+}
+
+@mixin desktop() {
+    @media (min-width: $desktop-breakpoint) {
+        @content;
+    }
+}
+
+@mixin tablet-content-pos(){
+    position: absolute;
+    top: 7.5rem;
+    right: 4.5rem;
+    left: 4.5rem;
+}
+
+@mixin mobile-content-pos(){
+    position: absolute;
+    top: 9rem;
+    right: 4.5rem;
+    left: 4.5rem;
+}
+
+// --- Mobile Mixins ---
+@mixin mobile-page-header{
+    font-family: 'Titillium-Web';
+    font-size: 1.75rem;
+    font-weight: 700;
+    line-height: 2.25rem;
+    color: $black;
+}
+
+@mixin mobile-sub-header{
+    font-family: 'Titillium-Web';
+    font-size: 1.25rem;
+    font-weight: 700;
+    line-height: 1.75rem;
+    color: $black;
+}
+
+@mixin mobile-labels{
+    font-family: 'Titillium-Web';
+    font-size: 0.80rem;
+    font-weight: 400;
+    line-height: 1.25rem;
+    color: $black;
+    
+}
+
+@mixin mobile-table-header{
+    font-family: 'Titillium-Web';
+    font-size: 0.70rem;
+    font-weight: 700;
+    line-height: 1rem;
+    padding-bottom: 0.5rem;
+    color: $slate;
+}
+
+@mixin mobile-body-large{
+    font-family: 'Titillium-Web';
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.6rem;
+    color: $black;
+}
+
+@mixin mobile-body-medium{
+    font-family: 'Titillium-Web';
+    font-size: 0.8rem;
+    font-weight: 400;
+    line-height: 1.25rem;
+    color: $black;  
+}
+
+@mixin mobile-body-small{
+    font-family: 'Titillium-Web';
+    font-size: 0.7rem;
+    font-weight: 400;
+    line-height: 1rem;
+    color: $black;
+}
+
+// --- Tablet and Dekstop Mixins ---
+@mixin tablet-page-header{
+    font-family: 'Titillium-Web';
+    font-size: 2rem;
+    font-weight: 700;
+    line-height: 2.5rem;
+    color: $black;
+}
+
+@mixin tablet-sub-header{
+    font-family: 'Titillium-Web';
+    font-size: 1.5;
+    font-weight: 700;
+    line-height: 2rem;
+    color: $black;
+}
+
+@mixin tablet-labels{
+    font-family: 'Titillium-Web';
+    font-size: 0.87rem;
+    font-weight: 400;
+    line-height: 1.4rem;
+    color: $black;
+    
+}
+
+@mixin tablet-table-header{
+    font-family: 'Titillium-Web';
+    font-size: 0.75rem;
+    font-weight: 400;
+    line-height: 1.13rem;
+    color: $slate;
+}
+
+@mixin tablet-body-large{
+    font-family: 'Titillium-Web';
+    font-size: 1.25rem;
+    font-weight: 400;
+    line-height: 1.5rem;
+    color: $black;
+}
+
+@mixin tablet-body-medium{
+    font-family: 'Titillium-Web';
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.4rem;
+    color: $black;  
+}
+
+@mixin tablet-body-small{
+    font-family: 'Titillium-Web';
+    font-size: 0.75rem;
+    font-weight: 400;
+    line-height: 1.13rem;
+    color: $black;
+}

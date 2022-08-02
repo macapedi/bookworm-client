@@ -6,12 +6,12 @@ import "./Header.scss";
 function Header() {
   return (
         <header className="header">
-          <NavLink to="/home">
+          <NavLink to="/books">
             <p className="header__logo"> BOOKWORM</p>
           </NavLink>
           <nav className="header__nav-links">
             <NavLink
-              to="/user/:id"
+              to="/users/:id"
               className={(isActive) =>
                 "header__nav-link header__nav-link" +
                 (isActive ? "--selected" : "")
@@ -20,7 +20,7 @@ function Header() {
               My shelves
             </NavLink>
             <NavLink
-              to="/public-shelves"
+              to="/users"
               className={(isActive) =>
                 "header__nav-link header__nav-link" +
                 (isActive ? "--selected" : "")
