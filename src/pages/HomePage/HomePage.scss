@@ -1,0 +1,33 @@
+p {
+    margin: 0;
+    padding: 0;
+}
+
+
+.books {
+
+    &__container{
+        max-width: 30%;
+     
+    }
+
+
+    &__image-container {
+        list-style: none;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 4rem;
+        align-items: center;
+        justify-content: center;
+        margin: 0;
+        padding: 2rem;
+        padding-bottom: 0rem;
+    }
+
+    &__image {
+        width: 100%;
+        aspect-ratio: 9 / 16;
+    }
+
+}
