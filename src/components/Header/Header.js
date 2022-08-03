@@ -1,6 +1,8 @@
 
 import {  NavLink } from "react-router-dom";
 import "./Header.scss";
+import LoginButton from "../LoginButton/LoginButton";
+import LogoutButton from "../LogOutButton/LogOutButton";
 
 
 function Header() {
@@ -28,6 +30,8 @@ function Header() {
             >
               Public Shelves
             </NavLink>
+            <LoginButton/>
+            <LogoutButton/>
           </nav>
         </header>
   );
