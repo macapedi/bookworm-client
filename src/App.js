@@ -15,7 +15,8 @@ import Login from './pages/Login/Login';
 class App extends React.Component {
 
   state = {
-    booksList: null
+    booksList: null,
+   
 
   }
 
@@ -25,7 +26,7 @@ class App extends React.Component {
     const key = "?api-key=MPpcrAgZYL3NCtOTzOVpM9K9D4DJGWee"
     const response = await axios.get(`${url}${key}`)
     const booksList = response.data;
-    console.log(response.data);
+   
 
 
     this.setState({
@@ -34,35 +35,48 @@ class App extends React.Component {
   }
 
 
-render() {
+  render() {
 
-if(this.state.booksList){
+    if (this.state.booksList) {
 
 
-  return (
-    <div className="App">
-      <BrowserRouter>
-        <Header />
-        <Switch>
-          <Route exact path="/">
-            <Redirect to="/login" />
-          </Route>
-          <Route path="/login" exact component={Login} />
-          <Route path="/books" exact >
-            <HomePage booksList={this.state.booksList}/>
-          </Route>
-          <Route path="/books/:id" component={BookDetailsPage} />
-          <Route path="/users" exact component={PublicShelvesPage} />
-          <Route path="/users/:id" component={UserPage} />
-        </Switch>
-      </BrowserRouter>
+      return (
+        <div className="App">
+          <BrowserRouter>
+            <Header />
+            <Switch>
+              <Route exact path="/">
+                <Redirect to="/login" />
+              </Route>
+              <Route path="/login" exact component={Login} />
+              <Route path="/books" exact render={(routerProps) => {
+                return (
+                  <HomePage
+                    booksList={this.state.booksList}
+                    routerProps={routerProps} />
+                );
+              }}
+              />
 
-    </div>
-  );
-} else{
-  <p>Loading...</p>
-}
-}
+              <Route path="/books/:id" exact render={(routerProps) => {
+                return (
+                  <BookDetailsPage
+                    booksList={this.state.booksList}
+                    routerProps={routerProps} />
+                );
+              }}
+              />
+              <Route path="/users" exact component={PublicShelvesPage} />
+              <Route path="/users/:id" component={UserPage} />
+            </Switch>
+          </BrowserRouter>
+
+        </div>
+      );
+    } else {
+      <p>Loading...</p>
+    }
+  }
 }
 
 export default App;

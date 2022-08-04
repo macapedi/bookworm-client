@@ -16,7 +16,7 @@ class HomePage extends React.Component {
 
 
   render() {
-    console.log(this.state.booksList.results.books);
+
 
     if (this.state.booksList) {
 
@@ -26,7 +26,7 @@ class HomePage extends React.Component {
           <ul className='books__image-container'>
 
             {this.state.booksList.results.books.map((book, index) => {
-              console.log(book.primary_isbn10);
+        
 
               return (
 
