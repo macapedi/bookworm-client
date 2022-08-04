@@ -7,17 +7,7 @@ class BookDetailsPage extends React.Component {
     singleBook: null
   }
 
-  // filteredBook = () => {
-  //   const bookId = this.props.routerProps.match.params.id;
-  //   const books = this.props.booksList.results.books;
-
-  //   const singleBook = books.filter((book, index) => bookId === book[index].primary_isbn10);
-  //   return this.setState({
-  //     singleBook
-  //   })
-  // }
-
-
+  
   componentDidMount() {
     const bookId = this.props.routerProps.match.params.id;
     const books = this.props.booksList.results.books;
