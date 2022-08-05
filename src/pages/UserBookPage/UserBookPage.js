@@ -1,8 +1,8 @@
 import React from 'react';
-import "./BookDetailsPage.scss";
+import "./UserBookPage.scss";
 import axios from "axios";
 
-class BookDetailsPage extends React.Component {
+class UserBookPage extends React.Component {
   state = {
     singleBook: null
   }
@@ -31,7 +31,7 @@ class BookDetailsPage extends React.Component {
   render() {
     
 
-
+    console.log(this.props.booksList);
 
     if (this.props.booksList.length) {
 
@@ -68,4 +68,4 @@ class BookDetailsPage extends React.Component {
   }
 }
 
-export default BookDetailsPage;
+export default UserBookPage;

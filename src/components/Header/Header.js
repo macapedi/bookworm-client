@@ -23,7 +23,7 @@ function Header() {
           </NavLink>
           <nav className="header__nav-links">
             <NavLink
-              to="/users/:id"
+              to="/users/2922c286-16cd-4d43-ab98-c79f698aeab0"
               className={(isActive) =>
                 "header__nav-link header__nav-link" +
                 (isActive ? "--selected" : "")
