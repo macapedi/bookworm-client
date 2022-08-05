@@ -16,27 +16,43 @@ import Signup from './pages/Signup/Singup';
 class App extends React.Component {
 
   state = {
-   
 
-    booksList: null,
 
+    booksList: [],
+    list: []
 
   }
 
   async componentDidMount() {
-    
+
     const url = 'https://api.nytimes.com/svc/books/v3/lists/current/hardcover-fiction.json'
     const key = "?api-key=MPpcrAgZYL3NCtOTzOVpM9K9D4DJGWee"
     const response = await axios.get(`${url}${key}`)
-    const booksList = response.data;
+    const booksList = response.data.results.books;
     console.log(response.data);
 
     this.setState({
-      booksList
+      booksList,
+      list: response.data.results.books
     })
   }
 
- 
+  // async componentUpdate() {
+
+  //   const url = 'https://api.nytimes.com/svc/books/v3/lists/current/hardcover-fiction.json'
+  //   const key = "?api-key=MPpcrAgZYL3NCtOTzOVpM9K9D4DJGWee"
+  //   const response = await axios.get(`${url}${key}`)
+  //   const booksList = response.data;
+  //   console.log(response.data);
+
+  //   this.setState({
+  //     booksList
+  //   })
+  // }
+
+
+
+
 
   render() {
 
@@ -55,6 +71,7 @@ class App extends React.Component {
             <Route path="/books" exact render={(routerProps) => {
               return (
                 <HomePage
+                  list={this.state.list}
                   booksList={this.state.booksList}
                   routerProps={routerProps} />
               );
@@ -64,6 +81,7 @@ class App extends React.Component {
             <Route path="/books/:id" exact render={(routerProps) => {
               return (
                 <BookDetailsPage
+                  list={this.state.list}
                   booksList={this.state.booksList}
                   routerProps={routerProps} />
               );

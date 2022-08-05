@@ -8,7 +8,21 @@ p {
 
     &__container{
         max-width: 30%;
+        text-decoration: none;
+        color: black;
+        font-weight: bold;
      
+    }
+    &__rank{
+        font-size: 2rem;
+        font-weight: 100;
+    }
+
+    &__wrapper{
+        display: flex;
+        gap: 0.5rem;
+        margin: 0;
+        padding: 0;
     }
 
 
@@ -19,15 +33,21 @@ p {
         flex-wrap: wrap;
         gap: 4rem;
         align-items: center;
-        justify-content: center;
+        justify-content: space-around;
         margin: 0;
         padding: 2rem;
+        padding-right: 3;
         padding-bottom: 0rem;
     }
 
     &__image {
         width: 100%;
         aspect-ratio: 9 / 16;
+    }
+
+    &__title{
+        padding: 1rem;
+        padding-bottom: 0;
     }
 
 }

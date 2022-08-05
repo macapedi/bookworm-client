@@ -1,23 +1,23 @@
 import React from 'react';
 import "./HomePage.scss";
 import { Link } from "react-router-dom";
-import axios from "axios";
+
 class HomePage extends React.Component {
 
 
 
 
   render() {
-
-console.log(this.props.booksList);
-    if (this.props.booksList) {
+console.log(this.props.list)
+    
+    if (this.props.list.length) {
 
       return (
         <>
-          <h1>This is Home Page</h1>
+          <h1 className='books__title'>Best Sellers List</h1>
           <ul className='books__image-container'>
 
-            {this.props.booksList.results.books.map((book, index) => {
+            {this.props.list.map((book, index) => {
 
 
               return (
@@ -26,8 +26,10 @@ console.log(this.props.booksList);
                 <li key={book.primary_isbn10} className="books__container">
                   <Link to={`/books/${book.primary_isbn10}`} className='books__container'>
 
+                    <div className='books__wrapper'>
+                    {/* <p className='books__rank'> {book.rank}</p> */}
                     <img className='books__image' src={book.book_image}></img>
-
+                    </div>
 
                   </Link>
                 </li>
