@@ -1,16 +1,33 @@
 import React from 'react';
 import "./UserPage.scss";
+import axios from "axios"
+import {Link} from "react-router-dom";
 
 
 class UserPage extends React.Component {
 
+  state = {
+    userBookList: []
+  }
 
 
+  async componentDidMount() {
+
+    const userId = this.props.routerProps.match.params.id;
+    const userBookListReq = await axios.get(`http://localhost:8080/users/${userId}`);
+
+    const userBookList = userBookListReq.data.inventoryBooks;
+    console.log(userBookList);
+    this.setState({
+      userBookList
+    })
+
+  }
 
   render() {
-    console.log(this.props.usersList);
 
-    if (this.props.usersList.length) {
+
+    if (this.props.usersList && this.state.userBookList) {
 
       const userId = this.props.routerProps.match.params.id;
       const users = this.props.usersList;
@@ -21,9 +38,39 @@ class UserPage extends React.Component {
 
       return (
         <>
-    <h1 className='user__title'>Single User Page</h1>
-    <p>{name}</p>
-    </>
+          <h1 className='user__title'>Single User Page</h1>
+          <p>{name}</p>
+
+          <ul className='books__image-container'>
+       
+
+            {this.state.userBookList.map((book, index) => {
+
+
+              return (
+
+
+                <li key={book.primary_isbn10} className="books__container">
+                  <Link to={`/users/${userId}/${book.primary_isbn10}`} className='books__container'>
+
+                    <div className='books__wrapper'>
+                      {/* <p className='books__rank'> {book.rank}</p> */}
+                      <img className='books__image' src={book.book_image}></img>
+                    </div>
+
+                  </Link>
+                </li>
+              )
+
+            })}
+
+          </ul>
+
+
+
+
+
+        </>
       )
     }
   }
