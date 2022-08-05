@@ -12,20 +12,10 @@ class Signup extends Component {
 
     handleSubmit = (event) => {
         event.preventDefault();
+        this.setState({
+            success: true
+        })
 
-        axios
-            .post("http://localhost:8080/api/users/register", {
-                email: event.target.email.value,
-                password: event.target.password.value,
-                
-            })
-            .then(() => {
-                this.setState({ success: true, error: "" });
-                event.target.reset();
-            })
-            .catch((error) => {
-                this.setState({ success: false, error: error.response ? error.response.data : error.message });
-            });
     };
 
     render() {
@@ -34,14 +24,14 @@ class Signup extends Component {
                 <form className="signup" onSubmit={this.handleSubmit}>
                     <h1 className="signup__title">Sign up</h1>
 
-                    
+
                     <Input type="text" name="email" label="Email" />
                     <Input type="password" name="password" label="Password" />
 
                     <button className="signup__button">Sign up</button>
 
-                    {this.state.success && <div className="signup__message">Signed up!</div>}
-                    {this.state.error && <div className="signup__message">{this.state.error}</div>}
+                    {this.state.success && <Link to="/login">Log in</Link>}
+ 
                 </form>
                 <p>
                     Have an account? <Link to="/login">Log in</Link>

@@ -1,9 +1,7 @@
 import "./Login.scss";
 import { Component } from "react";
 import { Link, Redirect } from "react-router-dom";
-import axios from "axios";
 import Input from "../../components/Input/Input";
-
 class Login extends Component {
     state = {
         error: "",
@@ -12,19 +10,9 @@ class Login extends Component {
 
     handleSubmit = (event) => {
         event.preventDefault();
-
-        axios
-            .post("http://localhost:8080/api/users/login", {
-                email: event.target.email.value,
-                password: event.target.password.value,
-            })
-            .then((response) => {
-                sessionStorage.setItem("token", response.data.token);
-                this.setState({ success: true });
-            })
-            .catch((error) => {
-                this.setState({ error: error.response ? error.response.data : error.message });
-            });
+this.setState({
+  success: true,
+})
     };
 
     render() {
@@ -37,8 +25,6 @@ class Login extends Component {
                     <Input type="password" name="password" label="Password" />
 
                     <button className="login__button">Log in</button>
-
-                    {this.state.error && <div className="login__message">{this.state.error}</div>}
                     {this.state.success && <Redirect to="/books" />}
                 </form>
                 <p>

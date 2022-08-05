@@ -5,6 +5,17 @@ import "./Header.scss";
 
 
 function Header() {
+
+
+ const handleLogout = () => {
+  
+    this.setState({
+      user: null,
+      failedAuth: true,
+    });
+  };
+
+
   return (
         <header className="header">
           <NavLink to="/books">

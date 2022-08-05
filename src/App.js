@@ -16,8 +16,7 @@ import Signup from './pages/Signup/Singup';
 class App extends React.Component {
 
   state = {
-    user: null,
-    failedAuth: false,
+   
 
     booksList: null,
 
@@ -25,42 +24,19 @@ class App extends React.Component {
   }
 
   async componentDidMount() {
-    const token = sessionStorage.getItem('token');
-
-    if (!token) {
-      return this.setState({ failedAuth: true });
-    }
-
-    const userPromise = await axios.get('http://localhost:8080/api/users/current', {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-    const user = userPromise.data;
-    this.setState({
-      user
-    })
-
-
+    
     const url = 'https://api.nytimes.com/svc/books/v3/lists/current/hardcover-fiction.json'
     const key = "?api-key=MPpcrAgZYL3NCtOTzOVpM9K9D4DJGWee"
     const response = await axios.get(`${url}${key}`)
     const booksList = response.data;
-
-
+    console.log(response.data);
 
     this.setState({
       booksList
     })
   }
 
-  handleLogout = () => {
-    sessionStorage.removeItem('token');
-    this.setState({
-      user: null,
-      failedAuth: true,
-    });
-  };
+ 
 
   render() {
 
@@ -80,8 +56,6 @@ class App extends React.Component {
               return (
                 <HomePage
                   booksList={this.state.booksList}
-                  user={this.state.user}
-                  failedAuth={this.state.failedAuth}
                   routerProps={routerProps} />
               );
             }}
