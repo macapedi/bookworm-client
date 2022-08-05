@@ -11,6 +11,7 @@ class HomePage extends React.Component {
 
 async componentDidMount() {
 const token = sessionStorage.getItem('token');
+console.log(token);
 
     if (!token) {
       return this.setState({ failedAuth: true });
