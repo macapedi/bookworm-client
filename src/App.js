@@ -71,6 +71,19 @@ class App extends React.Component {
   //   })
   // }
 
+  statusChangeHandler = async () => {
+
+    const usersReq = await axios.get("http://localhost:8080/users");
+    const usersResp = usersReq.data;
+    console.log(usersReq.data);
+
+    const booksReq = await axios.get("http://localhost:8080/books");
+    const booksResp = booksReq.data;
+    this.setState({
+      usersList: usersResp,
+      userBooks: booksResp,
+    });
+  }
 
 
 
@@ -103,6 +116,7 @@ class App extends React.Component {
             <Route path="/books/:id" exact render={(routerProps) => {
               return (
                 <BookDetailsPage
+                  statusChangeHandler={this.statusChangeHandler}
                   list={this.state.list}
                   booksList={this.state.booksList}
                   routerProps={routerProps} />
@@ -117,7 +131,7 @@ class App extends React.Component {
               );
             }}
             />
-            
+
             <Route path="/users/:id" exact render={(routerProps) => {
               return (
                 <UserPage
