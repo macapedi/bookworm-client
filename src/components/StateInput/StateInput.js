@@ -12,16 +12,16 @@ class StateInput extends React.Component {
     }
 
 
-    filteredBook = (props) => {
-        const booksList = this.props.booksList;
+    // filteredBook = () => {
+    //     const booksList = this.props.booksList;
 
-        const bookId = this.props.routerProps.match.params;
-        let bookFiltered = booksList.filter(book => bookId == book.primary_isbn10);
-        console.log(bookFiltered);
+    //     const bookId = this.props.routerProps.match.params.id;
+    //     let bookFiltered = booksList.filter(book => bookId == book.primary_isbn10);
+    //     console.log(bookFiltered);
 
-        return bookFiltered
+    //     return bookFiltered
 
-    }
+    // }
 
 
     handleChange = (event) => {
@@ -29,6 +29,7 @@ class StateInput extends React.Component {
         const bookId = this.props.routerProps.match.params.id;
 
         const books = this.props.booksList;
+        console.log(event.target.value);
 
         if (event.target.name === "status") {
             this.setState({
@@ -37,36 +38,34 @@ class StateInput extends React.Component {
             })
         }
 
-        const bookFound = this.filteredBook();
-
-        console.log(bookFound.length);
-
-        if (bookFound.length === 0) {
-            try {
-                console.log(this.props.booksList);
-                console.log(bookId);
-                const newFilteredBook = this.props.booksList.find(book => bookId == book.primary_isbn10);
-                console.log(newFilteredBook);
-
-                axios.post("http://localhost:8080/videos", {
-                    status: event.target.status.value,
-                    user_id: "2922c286-16cd-4d43-ab98-c79f698aeab0",
-                    author: "David Baldacci",
-                    book_image: "",
-                    description: "When his ex-girlfriend turns up dead in his office building, an entry-level investment analyst delves into the halls of economic power.",
-                    primary_isbn10: "1538719843",
-                    rank: "",
-                    title: "THE 6:20 MAN",
-                    notes: ""
+        // const bookFound = this.filteredBook();
 
 
-                })
-                    .then(() => { this.props.statusChangeHandler() })
 
-            } catch {
-                console.log("error");
-            }
+
+        try {
+
+            const newFilteredBook = books.find(book => bookId == book.primary_isbn10);
+            console.log(newFilteredBook);
+
+            axios.post("http://localhost:8080/books", {
+                author: newFilteredBook.author,
+                status: event.target.value,
+                book_image: newFilteredBook.book_image,
+                user_id: "2922c286-16cd-4d43-ab98-c79f698aeab0",
+                description: newFilteredBook.description,
+                primary_isbn10: bookId,
+                rank: newFilteredBook.rank,
+                title: newFilteredBook.title,
+                notes: ""
+
+            })
+                .then(() => { this.props.statusChangeHandler() })
+
+        } catch {
+            console.log("error");
         }
+
 
     }
 
