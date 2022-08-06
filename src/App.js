@@ -19,7 +19,7 @@ class App extends React.Component {
   state = {
 
     usersList: "",
-    userBooks: "",
+    usersBooks: "",
     booksList: [],
     list: []
 
@@ -38,7 +38,7 @@ class App extends React.Component {
     //Data from json files
     const usersReq = await axios.get("http://localhost:8080/users");
     const usersResp = usersReq.data;
-    console.log(usersResp);
+    
 
 
 
@@ -52,7 +52,7 @@ class App extends React.Component {
       booksList,
       list: response.data.results.books,
       usersList: usersResp,
-      userBooks: booksResp,
+      usersBooks: booksResp,
 
     });
 
@@ -89,6 +89,7 @@ class App extends React.Component {
 
 
   render() {
+console.log(this.state.usersBooks);
 
 
     return (
@@ -141,7 +142,16 @@ class App extends React.Component {
               );
             }}
             />
-            <Route path="/users/:id/:bookId" exact component={UserBookPage} />
+            <Route path="/users/:id/:bookId" exact render={(routerProps) => {
+              return (
+                <UserBookPage
+                  
+                  usersList={this.state.usersList}
+                  userBooks={this.state.userBooks}
+                  routerProps={routerProps} />
+              );
+            }}
+            />
 
 
           </Switch>

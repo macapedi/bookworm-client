@@ -17,7 +17,7 @@ class UserPage extends React.Component {
     const userBookListReq = await axios.get(`http://localhost:8080/users/${userId}`);
 
     const userBookList = userBookListReq.data.inventoryBooks;
-    console.log(userBookList);
+   
     this.setState({
       userBookList
     })
