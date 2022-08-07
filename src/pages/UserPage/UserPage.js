@@ -24,6 +24,19 @@ class UserPage extends React.Component {
 
   }
 
+  async componentDidUpdate() {
+
+    const userId = this.props.routerProps.match.params.id;
+    const userBookListReq = await axios.get(`http://localhost:8080/users/${userId}`);
+
+    const userBookList = userBookListReq.data.inventoryBooks;
+   
+    this.setState({
+      userBookList
+    })
+
+  }
+
   render() {
 
 
