@@ -25,51 +25,46 @@ class ShelveInput extends React.Component {
     // }
 
 
-    // handleChange = (event) => {
+    handleChange = (event) => {
 
-    //     const bookId = this.props.routerProps.match.params.id;
+        const bookId = this.props.routerProps.match.params.bookId;
+        const userId = this.props.routerProps.match.params.id;
+        console.log(this.props.routerProps)
 
-    //     const books = this.props.booksList;
-    //     console.log(event.target.value);
+        const book = this.props.singleUserBook;
 
-    //     if (event.target.name === "status") {
-    //         this.setState({
-    //             status: event.target.value,
-    //             statusMissing: false,
-    //             selected: event.target.value
-    //         })
-    //     }
+        if (event.target.name === "status") {
+            this.setState({
+                status: event.target.value,
+                statusMissing: false,
+                selected: event.target.value
+            })
+        }
 
-        // const bookFound = this.filteredBook();
+       
+        try {
 
+      
+            axios.put(`http://localhost:8080/users/${userId}/${bookId}`, {
+                author: book.author,
+                status: event.target.value,
+                book_image: book.book_image,
+                user_id: "2922c286-16cd-4d43-ab98-c79f698aeab0",
+                description: book.description,
+                primary_isbn10: bookId,
+                rank: book.rank,
+                title: book.title,
+                notes: ""
 
+            })
+                .then(() => { this.props.shelveChangeHandler() })
 
-
-    //     try {
-
-    //         const newFilteredBook = books.find(book => bookId == book.primary_isbn10);
-    //         console.log(newFilteredBook);
-
-    //         axios.put("http://localhost:8080/books", {
-    //             author: newFilteredBook.author,
-    //             status: event.target.value,
-    //             book_image: newFilteredBook.book_image,
-    //             user_id: "2922c286-16cd-4d43-ab98-c79f698aeab0",
-    //             description: newFilteredBook.description,
-    //             primary_isbn10: bookId,
-    //             rank: newFilteredBook.rank,
-    //             title: newFilteredBook.title,
-    //             notes: ""
-
-    //         })
-    //             .then(() => { this.props.statusChangeHandler() })
-
-    //     } catch {
-    //         console.log("error");
-    //     }
+        } catch {
+            console.log("error");
+        }
 
 
-    // }
+    }
 
     render() {
         console.log(this.props);

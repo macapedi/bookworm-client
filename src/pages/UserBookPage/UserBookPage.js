@@ -26,6 +26,23 @@ class UserBookPage extends React.Component {
     })
 
   }
+  // async componentDidUpdate() {
+  //   const userId = this.props.routerProps.match.params.id;
+  //   const bookId = this.props.routerProps.match.params.bookId;
+
+
+  //   const booksRequest = await axios.get("http://localhost:8080/books");
+
+  //   const books = booksRequest.data;
+
+  //   const singleUserBook = books.filter((book) => book.user_id == userId && bookId == book.primary_isbn10);
+
+  //   this.setState({
+  //     singleUserBook: singleUserBook[0]
+  //   })
+
+  // }
+
 
 
   shelveChangeHandler = async () => {
@@ -72,7 +89,7 @@ class UserBookPage extends React.Component {
               <p className='first-word'>Author: <span>{author}</span></p>
               <p className='first-word'>Description: <span>{description}</span></p>
             
-              <ShelveInput shelveChangeHandler={this.props.shelveChangeHandler} routerProps={this.props.routerProps} singleUserBook={this.state.singleUserBook}/>
+              <ShelveInput shelveChangeHandler={this.shelveChangeHandler} routerProps={this.props.routerProps} singleUserBook={this.state.singleUserBook}/>
             </div>
           </div>
         </>
