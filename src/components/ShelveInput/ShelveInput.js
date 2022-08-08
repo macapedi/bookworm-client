@@ -29,7 +29,7 @@ class ShelveInput extends React.Component {
 
         const bookId = this.props.routerProps.match.params.bookId;
         const userId = this.props.routerProps.match.params.id;
-        console.log(this.props.routerProps)
+      
 
         const book = this.props.singleUserBook;
 

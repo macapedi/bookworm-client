@@ -55,8 +55,7 @@ class BookDetailsPage extends React.Component {
               <p className='first-word'>Title: <span>{title}</span></p>
               <p className='first-word'>Author: <span>{author}</span></p>
               <p className='first-word'>Description: <span>{description}</span></p>
-              {/* <p className='first-word'>List:</p>
-              <input type="radio"></input> */}
+             
               <StateInput statusChangeHandler={this.props.statusChangeHandler} routerProps={this.props.routerProps} booksList={this.props.booksList}/>
 
             </div>

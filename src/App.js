@@ -9,6 +9,7 @@ import BookDetailsPage from './pages/BookDetailsPage/BookDetailsPage';
 import PublicShelvesPage from "./pages/PublicShelvesPage/PublicShelvesPage";
 import UserPage from "./pages/UserPage/UserPage";
 import UserBookPage from './pages/UserBookPage/UserBookPage';
+import UserBookPageEdit from './pages/UserBookPageEdit/UserBookPageEdit';
 import Login from './pages/Login/Login';
 import Signup from './pages/Signup/Singup';
 
@@ -58,17 +59,17 @@ class App extends React.Component {
 
   };
 
-  // async componentUpdate() {
+  // async componentDidUpdate() {
+    
+  //   const userId = this.props.routerProps.match.params.id;
+  //   const userBookListReq = await axios.get(`http://localhost:8080/users/${userId}`);
 
-  //   const url = 'https://api.nytimes.com/svc/books/v3/lists/current/hardcover-fiction.json'
-  //   const key = "?api-key=MPpcrAgZYL3NCtOTzOVpM9K9D4DJGWee"
-  //   const response = await axios.get(`${url}${key}`)
-  //   const booksList = response.data;
-  //   console.log(response.data);
-
+  //   const userBookList = userBookListReq.data.inventoryBooks;
+   
   //   this.setState({
-  //     booksList
+  //     userBookList
   //   })
+
   // }
 
   statusChangeHandler = async () => {
@@ -154,6 +155,18 @@ console.log(this.state.usersBooks);
               );
             }}
             />
+             <Route path="/users/:id/:bookId/edit" exact render={(routerProps) => {
+              return (
+                <UserBookPageEdit
+                  
+                  usersList={this.state.usersList}
+                  userBooks={this.state.userBooks}
+                  routerProps={routerProps} />
+              );
+            }}
+            />
+
+
 
 
           </Switch>

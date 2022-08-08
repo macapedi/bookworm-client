@@ -1,0 +1,12 @@
+.book-details{
+
+&__notes-container{
+    width: 100%;
+}
+
+    &__notes-editor{
+        width: 100%;
+  
+        min-height: 8rem;
+    }
+}
