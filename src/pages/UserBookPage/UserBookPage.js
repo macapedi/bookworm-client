@@ -73,16 +73,11 @@ class UserBookPage extends React.Component {
     this.props.routerProps.history.push(`/users/${userId}/${bookId}/edit`);
   }
 
-  deleteHandleButton = async () => {
+  deleteButtonHandler = async () => {
     const userId = this.props.routerProps.match.params.id;
     const bookId = this.props.routerProps.match.params.bookId;
 
-    try {
-      axios.delete(`http://localhost:8080/users/${userId}${bookId}`)
-    }
-    catch (error) {
-      console.log("some little bug");
-    }
+    await axios.delete(`http://localhost:8080/users/${userId}/${bookId}`)
 
     this.props.routerProps.history.push(`/users/${userId}`)
 
