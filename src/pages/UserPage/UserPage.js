@@ -14,7 +14,8 @@ class UserPage extends React.Component {
     readingList: [],
     wishList: [],
     readList: [],
-    droppedList: []
+    droppedList: [],
+    currentUser: null
   }
 
 
@@ -34,44 +35,50 @@ class UserPage extends React.Component {
     console.log(finishedList);
 
 
-
-
     this.setState({
       userBookList,
       finishedList,
       wishList,
       readingList,
-      droppedList
+      droppedList,
+      currentUser: userId
+
     })
 
   }
 
-  async componentDidUpdate() {
+  async componentDidUpdate(_prevProps,prevState) {
+
+
 
     const userId = this.props.routerProps.match.params.id;
-    const userBookListReq = await axios.get(`http://localhost:8080/users/${userId}`);
 
-    const userBookList = userBookListReq.data.inventoryBooks;
-    console.log(userBookList);
-
-    const finishedList = userBookList.filter((book) => book.status === "Finished");
-    const wishList = userBookList.filter((book) => book.status === "Wish List");
-    const readingList = userBookList.filter((book) => book.status === "Reading");
-    const droppedList = userBookList.filter((book) => book.status === "Dropped");
-
-    console.log(finishedList);
+    console.log("this is user id",userId);
+    console.log("this is prevState", prevState);
 
 
+    if (userId !== prevState.currentUser) {
+      const userBookListReq = await axios.get(`http://localhost:8080/users/${userId}`);
 
+      const userBookList = userBookListReq.data.inventoryBooks;
+      console.log(userBookList);
 
-    this.setState({
-      userBookList,
-      finishedList,
-      wishList,
-      readingList,
-      droppedList
-    })
+      const finishedList = userBookList.filter((book) => book.status === "Finished");
+      const wishList = userBookList.filter((book) => book.status === "Wish List");
+      const readingList = userBookList.filter((book) => book.status === "Reading");
+      const droppedList = userBookList.filter((book) => book.status === "Dropped");
 
+      console.log(finishedList);
+
+      this.setState({
+        userBookList,
+        finishedList,
+        wishList,
+        readingList,
+        droppedList,
+        currentUser: userId
+      })
+    }
   }
 
 
@@ -81,8 +88,6 @@ class UserPage extends React.Component {
     const users = this.props.usersList;
 
     if (this.props.usersList && this.state.userBookList) {
-
-
 
 
       const singleUser = users.filter((user) => userId === user.id);

@@ -75,7 +75,7 @@ class StateInput extends React.Component {
 
         return (
             <div className="state__field">
-                <p>Shelves:</p>
+                <p className="first-word">Shelves:</p>
 
                 <fieldset className="state__container" >
                     <div className="state__wraper">

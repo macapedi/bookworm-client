@@ -18,7 +18,7 @@ function Header() {
 
   return (
         <header className="header">
-          <NavLink to="/books">
+          <NavLink to="/books" className="header__logo-link">
             <p className="header__logo"> BOOKWORM</p>
           </NavLink>
           <nav className="header__nav-links">
@@ -29,7 +29,7 @@ function Header() {
                 (isActive ? "--selected" : "")
               }
             >
-              My shelves
+              <span className="header__nav-link-text">My Shelves</span>
             </NavLink>
             <NavLink
               to="/users"
@@ -38,7 +38,7 @@ function Header() {
                 (isActive ? "--selected" : "")
               }
             >
-              Public Shelves
+              <span className="header__nav-link-text">Public Shelves</span>
             </NavLink>
           
           </nav>

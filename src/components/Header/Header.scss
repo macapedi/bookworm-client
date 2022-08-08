@@ -4,21 +4,31 @@
 
 .header{
     position: sticky;
+    z-index:1000;
     top: 0px;
     display: flex;
-    background-color: rgb(245, 205, 72);
+    background-color: $yellow;
     flex-direction: column;
     align-items: center;
     text-decoration: none;
     min-height: 10vh;
+
     @include tablet{
         display: flex;
         justify-content: space-between;
         flex-direction: row;
         align-items: center;
+        font-size: larger;
+       
     }
     &__logo{
       text-decoration: none;
+      font-weight: bold;
+      padding: 1rem;
+      padding-top: 1.5rem;
+      padding-bottom: 1.5rem;
+      font-size: 1.2rem;
+      justify-self: flex-start;
       
       color: rgb(0, 0, 0);
         @include tablet{
@@ -27,9 +37,17 @@
         }
      
     }
+    &__logo-link{
+        align-self: flex-start;
+        text-decoration: none;
+    }
     &__nav-links{
+   
         display: flex;
+        width: 100%;
         justify-content: space-between;
+        align-items: center;
+     
         
         @include tablet{
             justify-content: center;
@@ -37,13 +55,16 @@
      
     }
     &__nav-link{
-        color: black;
+        display: flex;
+        color: white;
         font-size: 1rem;
         text-decoration: none;
         text-align: center;
         border-radius: 50px;
         min-width: 150px;
-        min-height: 23px;
+        min-height: 3rem;
+        background-color: black;
+        border-radius: 4px;
        
      
         //on hover
@@ -62,6 +83,14 @@
                 padding-bottom: 0;
             }
         }
+    }
+
+    &__nav-link-text{
+        justify-self: center;
+        height: 100%;
+        width: 100%;
+        align-self: center;
+       
     }
 }
 

@@ -68,10 +68,11 @@ class UserBookPageEdit extends React.Component {
             singleUserBook: singleUserBook[0]
         })
     }
-    
+
     cancelButtonHandler = () => {
         const userId = this.props.routerProps.match.params.id;
-        this.props.routerProps.history.push(`/users/${userId}/`);
+        const bookId = this.props.routerProps.match.params.bookId;
+        this.props.routerProps.history.push(`/users/${userId}/${bookId}`);
     }
 
 
@@ -140,15 +141,19 @@ class UserBookPageEdit extends React.Component {
 
                             {userId == currentUserId && <ShelveInput shelveChangeHandler={this.shelveChangeHandler} routerProps={this.props.routerProps} singleUserBook={this.state.singleUserBook} />}
                         </div>
-                        <div className='book-details__notes-container'>
-                            <div className='book-details__notes-container'>
-                                <p className='first-word'>Notes:</p>
-                                <form>
+                        <div className='book-details__notes-bigcontainer'>
+                            <p className='first-word'>Notes:</p>
+
+                            <form>
+                                <div className='book-details__notes-container'>
                                     <textarea onChange={this.notesChangeHandler} className='book-details__notes-editor' name="notes" value={this.state.notes}></textarea>
-                                    <button onClick={this.notesClickHandler}><img src={saveIcon} alt="save icon" className='icon'></img>Save</button>
-                                    <button onClick={this.cancelButtonHandler}><img className='icon' src={cancelIcon} alt="cancel icon"></img>Cancel</button>
-                                </form>
-                            </div>
+                                </div>
+                                <div className='book-details__button-container'>
+                                    <button onClick={this.notesClickHandler} className="button"><img src={saveIcon} alt="save icon" className='icon'></img></button>
+                                    <button onClick={this.cancelButtonHandler} className="button"><img className='icon' src={cancelIcon} alt="cancel icon"></img></button>
+                                </div>
+                            </form>
+
                         </div>
                     </div>
                 </>

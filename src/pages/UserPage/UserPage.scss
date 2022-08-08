@@ -27,7 +27,7 @@
     }
 
     &__subtitle {
-        border-bottom: 2px solid rgb(245, 205, 72);
+        border-bottom: 2px solid $yellow;
 
     }
     &__badge{
@@ -58,8 +58,19 @@
     }
 
     &__container {
-        width: 100%;
-        margin: 0;
+        max-width: 30%;
+        text-decoration: none;
+        color: black;
+        font-weight: bold;
+
+        @include tablet {
+            max-width: 20%;
+
+            @include desktop {
+                max-width: 20%;
+            }
+
+        }
     }
 
     &__image-container {
@@ -97,7 +108,8 @@
         }
 
         @include tablet {
-            width: 60%;
+            width: 80%;
+            
         }
 
         
@@ -106,4 +118,11 @@
 
 .badge{
     max-width: 100px;
+    background-color: $yellow;
+    border-radius: 50%;
+    transition: transform .7s ease-in-out;
+
+    &:hover{
+        transform: rotate(360deg);
+    }
 }
