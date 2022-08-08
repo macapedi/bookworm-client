@@ -1,14 +1,15 @@
 
-import {  NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import "./Header.scss";
+import avatar from "../../assets/images/avatar.png";
 
 
 
 function Header() {
 
 
- const handleLogout = () => {
-  
+  const handleLogout = () => {
+
     this.setState({
       user: null,
       failedAuth: true,
@@ -17,32 +18,42 @@ function Header() {
 
 
   return (
-        <header className="header">
-          <NavLink to="/books" className="header__logo-link">
-            <p className="header__logo"> BOOKWORM</p>
-          </NavLink>
-          <nav className="header__nav-links">
-            <NavLink
-              to="/users/2922c286-16cd-4d43-ab98-c79f698aeab0"
-              className={(isActive) =>
-                "header__nav-link header__nav-link" +
-                (isActive ? "--selected" : "")
-              }
-            >
-              <span className="header__nav-link-text">My Shelves</span>
-            </NavLink>
-            <NavLink
-              to="/users"
-              className={(isActive) =>
-                "header__nav-link header__nav-link" +
-                (isActive ? "--selected" : "")
-              }
-            >
-              <span className="header__nav-link-text">Public Shelves</span>
-            </NavLink>
-          
-          </nav>
-        </header>
+    <header className="header">
+      <div className="header__logo-avatar-wrapper">
+        <NavLink to="/books" className="header__logo-link">
+          <p className="header__logo"> BOOKWORM</p>
+        </NavLink>
+        <div className="avatar__container">
+          <img className="avatar" src={avatar}></img>
+          <Link to="/login"className="avatar__logout-link">Logout</Link>
+        </div>
+      </div>
+      <nav className="header__nav-links">
+        <NavLink
+          to="/users/2922c286-16cd-4d43-ab98-c79f698aeab0"
+          className={(isActive) =>
+            "header__nav-link header__nav-link" +
+            (isActive ? "--selected" : "")
+          }
+        >
+          <span className="header__nav-link-text">My Shelves</span>
+        </NavLink>
+        <NavLink
+          to="/users"
+          className={(isActive) =>
+            "header__nav-link header__nav-link" +
+            (isActive ? "--selected" : "")
+          }
+        >
+          <span className="header__nav-link-text">Public Shelves</span>
+        </NavLink>
+        <div className="avatar-tablet__container">
+          <img className="avatar-tablet" src={avatar}></img>
+          <Link to="/login"className="avatar-tablet__logout-link">Logout</Link>
+        </div>
+
+      </nav>
+    </header>
   );
 }
 export default Header;

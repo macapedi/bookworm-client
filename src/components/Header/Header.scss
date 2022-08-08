@@ -2,9 +2,9 @@
 @use "../../styles/partials/variables" as *;
 @use "../../styles/partials/mixins" as *;
 
-.header{
+.header {
     position: sticky;
-    z-index:1000;
+    z-index: 1000;
     top: 0px;
     display: flex;
     background-color: $yellow;
@@ -13,48 +13,73 @@
     text-decoration: none;
     min-height: 10vh;
 
-    @include tablet{
+    @include tablet {
         display: flex;
         justify-content: space-between;
         flex-direction: row;
         align-items: center;
         font-size: larger;
-       
+
     }
-    &__logo{
-      text-decoration: none;
-      font-weight: bold;
-      padding: 1rem;
-      padding-top: 1.5rem;
-      padding-bottom: 1.5rem;
-      font-size: 1.2rem;
-      justify-self: flex-start;
-      
-      color: rgb(0, 0, 0);
-        @include tablet{
+
+    &__logo {
+        text-decoration: none;
+        font-weight: bold;
+        padding: 1rem;
+        padding-top: 1.5rem;
+        padding-bottom: 1.5rem;
+        font-size: 1.2rem;
+        justify-self: flex-start;
+        align-self: center;
+
+        color: rgb(0, 0, 0);
+
+        @include tablet {
             justify-content: center;
-    
+            padding-left: 3rem;
+            font-size: 2rem;
+
+            @include desktop {
+                font-size: 2rem;
+            }
+
         }
-     
     }
-    &__logo-link{
+
+    &__logo-link {
         align-self: flex-start;
         text-decoration: none;
+
+        @include tablet {
+            align-self: center;
+        }
     }
-    &__nav-links{
-   
+
+    &__logo-avatar-wrapper {
+        width: 100%;
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between;
+        padding-bottom: 1rem;
+    }
+
+    &__nav-links {
+
         display: flex;
         width: 100%;
         justify-content: space-between;
         align-items: center;
-     
-        
-        @include tablet{
-            justify-content: center;
+
+
+        @include tablet {
+            justify-content: flex-end;
+            gap: 1rem;
+
         }
-     
+
     }
-    &__nav-link{
+
+    &__nav-link {
         display: flex;
         color: white;
         font-size: 1rem;
@@ -65,35 +90,100 @@
         min-height: 3rem;
         background-color: black;
         border-radius: 4px;
-       
-     
+
+
         //on hover
-        &:hover{
+        &:hover {
             text-decoration: underline;
         }
-        
-        &--selected{
+
+        &--selected {
             color: $white;
             background-color: $black;
-         
-            @include tablet{
-                
-            }
-            @include desktop{
+            text-decoration: underline;
+
+            @include tablet {}
+
+            @include desktop {
                 padding-bottom: 0;
             }
         }
     }
 
-    &__nav-link-text{
+    &__nav-link-text {
         justify-self: center;
         height: 100%;
         width: 100%;
         align-self: center;
-       
+
     }
 }
 
-.active{
+.active {
     text-decoration: none;
+}
+
+.avatar {
+    border-radius: 50%;
+    height: 36px;
+    width: 36px;
+
+
+    @include tablet {
+        height: 40px;
+        width: 40px;
+
+    }
+
+    &__container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding-right: 1rem;
+
+        @include tablet {
+            display: none;
+
+        }
+    }
+
+    &__logout-link {
+        text-decoration: none;
+        color: black;
+    }
+
+}
+
+.avatar-tablet {
+
+    border-radius: 50%;
+    height: 36px;
+    width: 36px;
+
+
+    @include tablet {
+        height: 40px;
+        width: 40px;
+    }
+
+    &__container {
+        display: none;
+
+        @include tablet {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-right: 2rem;
+
+            @include desktop {
+                padding-right: 4rem;
+                padding-left: 2rem;
+            }
+        }
+    }
+
+    &__logout-link {
+        text-decoration: none;
+        color: black;
+    }
 }
