@@ -1,3 +1,6 @@
+@use '../../styles/partials/mixins' as *;
+
+
 .book-details {
 
     &__container {
@@ -12,6 +15,15 @@
     &__image {
         max-width: 60%;
         padding-bottom: 1rem;
+
+        @include tablet{
+            max-width: 40%;
+
+            @include desktop{
+                max-width: 30%;
+            }
+        }
+
     }
 
     &__title{

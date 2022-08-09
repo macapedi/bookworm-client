@@ -1,49 +1,48 @@
 import React from 'react';
 import "./PublicShelvesPage.scss";
-import {Link} from "react-router-dom"
+import { Link } from "react-router-dom"
+import mainBadge from "../../assets/images/mainBadge.png";
 
 class PublicShelvesPage extends React.Component {
 
 
 
-render () {
+  render() {
 
-  if (this.props.usersList.length) {
+    if (this.props.usersList.length) {
 
-    return (
-      <>
-        <h1 className='books__title'>Users Page</h1>
-        <ul className='books__image-container'>
+      return (
+        <>
+          <h1 className='public-users__title'>BookWormers</h1>
+          <ul className='public-users__container'>
 
-          {this.props.usersList.map((user, index) => {
-
-
-            return (
+            {this.props.usersList.map((user, index) => {
 
 
-              <li key={user.id} className="users__container">
-                <Link to={`/users/${user.id}`} className='users__container'>
+              return (
 
-                  <div className='users__wrapper'>
-                  <p className='users'> {user.name}</p>
 
-                  </div>
+                <li key={user.id} className="public-users__link-container">
+                  <Link to={`/users/${user.id}`} className='public-users__link-container'>
+                    <div className='public-users__wrapper'>
+                      <p className='public-users__name'> {user.name}</p>
+                      <img src={mainBadge} alt="baby worm bage" className='badge'></img>
+                    </div>
 
-                </Link>
-              </li>
-            )
+                  </Link>
+                </li>
+              )
 
-          })}
+            })}
 
-        </ul>
+          </ul>
 
-      </>
-    );
-  } else {
-    return <p>Loading...</p>
-  }
+        </>
+      );
+    } else {
+      return <p>Loading...</p>
+    }
   }
 }
-  
-  export default PublicShelvesPage;
-  
+
+export default PublicShelvesPage;

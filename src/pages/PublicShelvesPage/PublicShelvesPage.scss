@@ -1,0 +1,80 @@
+@use '../../styles/partials/mixins' as *;
+@use '../../styles/partials/variables' as *;
+
+
+p {
+    margin: 0;
+    padding: 0;
+}
+li{
+    list-style: none;
+  
+        
+}
+
+.public-users{
+
+    &__title{
+        text-align: center;
+        padding: 1rem;
+        @include tablet{
+            padding-left: 2rem;
+            @include desktop{
+                padding-left: 4rem;
+            }
+        }
+    }
+  
+    &__container{
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+        border: 1 solid $yellow;
+        gap: 2rem;
+    }
+
+    &__link-container{
+        text-decoration: none;
+        list-style: none;
+        color: black;
+        
+       
+        
+    }
+    &__wrapper {
+        transition: transform .5s ease;
+        width: 100%;
+        margin: 0;
+        list-style: none;
+        padding: 8rem;
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+        
+        
+
+        &:hover {
+            transform: scale(1.05);
+        }
+
+        @include tablet{
+            width: 70%;
+            @include desktop{
+                width: 50%;
+            }
+        }
+
+    }
+}
+
+.badge{
+    max-width: 100px;
+    background-color: $yellow;
+    border-radius: 50%;
+    transition: transform .7s ease-in-out;
+
+    &:hover{
+        transform: rotate(360deg);
+    }
+}

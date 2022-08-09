@@ -100,8 +100,15 @@ class UserPage extends React.Component {
             {this.state.finishedList &&
               <div className='user__badge'>
                 <p className='user__books-finished-text'><span className='user__books-finished'>{this.state.finishedList.length}</span> BOOKS FINISHED</p>
-                <img src={babyWorm} alt="baby worm bage" className='badge'></img>
-
+                {this.state.finishedList.length < 12 &&
+                  <img src={babyWorm} alt="baby worm bage" className='badge'></img>
+                }
+                {this.state.finishedList.length === 12 &&
+                  <img src={superWorm} alt="baby worm bage" className='badge'></img>
+                }
+                {this.state.finishedList.length >= 13 &&
+                  <img src={megaWorm} alt="baby worm bage" className='badge'></img>
+                }
               </div>
             }
           </div>

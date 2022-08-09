@@ -104,7 +104,7 @@ class UserBookPage extends React.Component {
 
       return (
         <>
-          <h1 className='book-details__title'>Book Details for Specific User</h1>
+          
           <div className='book-details__container'>
             <img src={book_image} alt={title} className="book-details__image"></img>
             <div className='book-details_text-wrapper'>

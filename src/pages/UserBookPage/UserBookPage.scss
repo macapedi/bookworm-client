@@ -1,5 +1,6 @@
 
 @use '../../styles/partials/variables' as *;
+@use "../../styles//partials/mixins" as *;
 
 .icon{
     max-width: 1.5rem;
@@ -12,8 +13,17 @@
 
     &__container{
         background-color: antiquewhite;
-        margin: 1rem;
+        margin: 2rem;
         border-radius: 4px;
+        @include tablet{
+            margin: 4rem;
+            @include desktop{
+                margin: 4rem;
+                margin-left: 8rem;
+                margin-right: 8rem;
+            }
+
+        }
     }
 
     &__notes-bigcontainer{
