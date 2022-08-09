@@ -6,30 +6,43 @@
 .user {
     padding: 0;
 
-&__title-badge-container{
-    padding: 2rem;
-    display: flex;
-    flex-direction: column;
-    @include tablet{
-        flex-direction: row;
-        justify-content: space-between;
-        @include desktop{
-            padding-left: 4rem;
-            padding-right: 4rem;
-        }
+    &__title-badge-container {
+        padding: 2rem;
+        display: flex;
+        flex-direction: column;
 
+        @include tablet {
+            flex-direction: row;
+            justify-content: space-between;
+
+            @include desktop {
+                padding-left: 4rem;
+                padding-right: 4rem;
+            }
+
+        }
     }
-}
+
+    &__title{
+        margin: 0;
+        margin-bottom: 0.5rem;
+        align-self: center;
+    }
+
     &__list-wrapper {
         margin: 2rem;
+        margin-top: 0;
         background-color: antiquewhite;
         border-radius: 10px;
         padding: 1rem;
 
-        @include tablet{
+        @include tablet {
             margin: 2rem;
-            @include desktop{
+            margin-top: 0;
+
+            @include desktop {
                 margin: 4rem;
+                margin-top: 0;
             }
         }
     }
@@ -38,7 +51,8 @@
         border-bottom: 2px solid $yellow;
 
     }
-    &__badge{
+
+    &__badge {
         display: flex;
         flex-direction: row;
         align-items: center;
@@ -46,15 +60,18 @@
         border: 1px solid $yellow;
         gap: 1rem;
         padding-left: 0.5rem;
+
     }
-    &__books-finished{
+
+    &__books-finished {
         display: flex;
         font-weight: bold;
         font-size: xx-large;
         align-items: center;
         justify-content: center;
     }
-    &__books-finished-text{
+
+    &__books-finished-text {
         width: 100%;
         text-align: center;
     }
@@ -71,9 +88,10 @@
             transform: scale(1.05);
         }
 
-        @include tablet{
+        @include tablet {
             width: 70%;
-            @include desktop{
+
+            @include desktop {
                 width: 50%;
             }
         }
@@ -109,7 +127,8 @@
 
         @include tablet {
             gap: 1rem;
-            @include desktop{
+
+            @include desktop {
                 width: 100%;
                 padding: 2rem;
                 justify-content: flex-start;
@@ -132,20 +151,26 @@
 
         @include tablet {
             width: 80%;
-            
+
         }
 
-        
+
     }
 }
 
-.badge{
-    max-width: 100px;
+.badge {
+    max-width: 50px;
     background-color: $yellow;
     border-radius: 50%;
     transition: transform .7s ease-in-out;
 
-    &:hover{
+    &:hover {
         transform: rotate(360deg);
     }
+
+    @include desktop {
+        max-width: 100px;
+    }
+
+
 }

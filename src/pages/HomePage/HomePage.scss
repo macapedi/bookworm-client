@@ -9,6 +9,19 @@ p {
 
 
 .books-home {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  
+    
+    
+
+    @include desktop{
+        
+        margin: 4rem;
+        margin-top: 0;
+        justify-content: center;
+    }
 
     &__image-container {
         display: flex;
@@ -80,8 +93,26 @@ p {
 
         @include tablet {
             padding: 2rem;
+            padding-bottom: 0rem;
             @include desktop{
-                padding: 4rem;
+                padding-bottom: 0rem;
+                padding-top: 0;
+                padding-left: 4rem;
+                align-self: flex-start;
+               
+            }
+        }
+    }
+
+    &__button-wrapper{
+        display: flex;
+        gap: 1rem;
+        padding-left: 1rem;
+        @include tablet{
+            padding-left: 2rem;
+            @include desktop{
+                padding-left: 4rem;
+                align-self: flex-start;
             }
         }
     }
@@ -89,15 +120,16 @@ p {
 
     &__button {
         display: flex;
-        color: white;
+        color: black;
         font-size: 1rem;
         text-decoration: none;
         text-align: center;
         border-radius: 50px;
         min-width: 150px;
         min-height: 3rem;
-        background-color: black;
+        background-color: $yellow;
         border-radius: 4px;
+        border: none;
 
 
         //on hover
@@ -106,9 +138,10 @@ p {
         }
 
         &--selected {
-            color: $white;
-            background-color: $black;
+            color: black;
+            background-color: $yellow;
             text-decoration: underline;
+            border: 1px solid black;
 
             @include tablet {}
 
@@ -116,5 +149,10 @@ p {
                 padding-bottom: 0;
             }
         }
+    }
+    &__button-text{
+        justify-self: center;
+        width: 100%;
+        align-self: center;
     }
 }

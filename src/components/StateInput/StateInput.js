@@ -78,33 +78,37 @@ class StateInput extends React.Component {
                 <p className="first-word">Shelves:</p>
 
                 <fieldset className="state__container" >
-                    <div className="state__wraper">
+                    <div className="state__container-wraper">
+                        <div className="state__wraper">
 
-                        <input onChange={this.handleChange} type="radio" id="reading" name="status" className="field__input" value="Reading" />
-                        <label htmlFor="reading" className="field__label">
-                            Reading
-                        </label>
+                            <input onChange={this.handleChange} type="radio" id="reading" name="status" className="field__input" value="Reading" />
+                            <label htmlFor="reading" className="field__label">
+                                Reading
+                            </label>
+                        </div>
+                        <div className="state__wraper">
+
+                            <input onChange={this.handleChange} type="radio" id="wishList" name="status" className="field__input" value="Wish List" />
+                            <label htmlFor="wishList" className="field__label">
+                                Wish List
+                            </label>
+                        </div>
                     </div>
-                    <div className="state__wraper">
+                    <div className="state__container-wraper">
+                        <div className="state__wraper">
 
-                        <input onChange={this.handleChange} type="radio" id="wishList" name="status" className="field__input" value="Wish List" />
-                        <label htmlFor="wishList" className="field__label">
-                            Wish List
-                        </label>
-                    </div>
-                    <div className="state__wraper">
+                            <input onChange={this.handleChange} type="radio" id="finished" name="status" className="field__input" value="Finished" />
+                            <label htmlFor="finished" className="field__label">
+                                Finished
+                            </label>
+                        </div>
+                        <div className="state__wraper">
 
-                        <input onChange={this.handleChange} type="radio" id="finished" name="status" className="field__input" value="Finished" />
-                        <label htmlFor="finished" className="field__label">
-                            Finished
-                        </label>
-                    </div>
-                    <div className="state__wraper">
-
-                        <input onChange={this.handleChange} type="radio" id="dropped" name="status" className="field__input" value="Dropped" />
-                        <label htmlFor="dropped" className="field__label">
-                            Dropped
-                        </label>
+                            <input onChange={this.handleChange} type="radio" id="dropped" name="status" className="field__input" value="Dropped" />
+                            <label htmlFor="dropped" className="field__label">
+                                Dropped
+                            </label>
+                        </div>
                     </div>
                 </fieldset>
             </div>

@@ -1,9 +1,16 @@
-
+@use "../../styles/partials/mixins" as *;
+@use "../../styles/partials/variables" as *;
 
 
 .state{
 
     &__container{
-        border: none;
+        display: flex;
+        flex-direction: column;
+        @include desktop{
+            flex-direction: row;
+            gap: 1.5rem;
+        }
+
     }
 }

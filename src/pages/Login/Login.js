@@ -20,7 +20,7 @@ class Login extends Component {
             <main className="login-page">
                 <form className="login" onSubmit={this.handleSubmit}>
                     <h1 className="login__title">Log in</h1>
-
+                    
                     <Input type="text" name="email" label="Email" />
                     <Input type="password" name="password" label="Password" />
 

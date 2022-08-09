@@ -4,66 +4,73 @@ import { Link } from "react-router-dom";
 
 class HomePage extends React.Component {
 
-  state= {
-    fictionCategory: true,
+  state = {
+    fictionCategory: false,
     nonFictionCategory: false
   }
 
-  fictionHandler = ()=>{
+  fictionHandler = () => {
     this.setState({
       fictionCategory: true,
-      nonFictionCategory:false
+      nonFictionCategory: false
     })
     this.props.handleFiction();
   }
 
-  nonFictionHandler = ()=>{
+  nonFictionHandler = () => {
     this.setState({
       fictionCategory: false,
-      nonFictionCategory:true
+      nonFictionCategory: true
     })
     this.props.handleNonFiction();
   }
 
   render() {
-console.log(this.props.list)
-    
+    console.log(this.props.list)
+
     if (this.props.list.length) {
 
       return (
         <>
-          <h1 className='books-home__title'>Best Sellers List</h1>
-          <div className='books-home__button-wrapper'>
-            <button onClick={this.fictionHandler} className="books-home__button">Fiction</button>
-            <button onClick={this.nonFictionHandler} className="books-home__button">Non Fiction</button>
+          <div className='books-home'>
+            <h1 className='books-home__title'> NYT Best Sellers</h1>
+            <div className='books-home__button-wrapper'>
+              <button onClick={this.fictionHandler} className={
+                "books-home__button books-home__button" +
+                (this.state.fictionCategory === true ? "--selected" : "")}><span className='books-home__button-text'>Fiction</span></button>
+              <button onClick={this.nonFictionHandler} className={
+                "books-home__button books-home__button" +
+                (this.state.nonFictionCategory === true ? "--selected" : "")}><span className='books-home__button-text'>Non Fiction</span></button>
 
+            </div>
+
+
+
+
+            <ul className='books-home__image-container'>
+
+              {this.props.list.map((book, index) => {
+
+
+                return (
+
+
+                  <li key={book.primary_isbn10} className="books-home__container">
+                    <Link to={`/books/${book.primary_isbn10}`} className='books-home__container'>
+
+                      <div className='books-home__wrapper'>
+                        {/* <p className='books__rank'> {book.rank}</p> */}
+                        <img className='books-home__image' src={book.book_image}></img>
+                      </div>
+
+                    </Link>
+                  </li>
+                )
+
+              })}
+
+            </ul>
           </div>
-
-
-
-          <ul className='books-home__image-container'>
-
-            {this.props.list.map((book, index) => {
-
-
-              return (
-
-
-                <li key={book.primary_isbn10} className="books-home__container">
-                  <Link to={`/books/${book.primary_isbn10}`} className='books-home__container'>
-
-                    <div className='books-home__wrapper'>
-                    {/* <p className='books__rank'> {book.rank}</p> */}
-                    <img className='books-home__image' src={book.book_image}></img>
-                    </div>
-
-                  </Link>
-                </li>
-              )
-
-            })}
-
-          </ul>
 
         </>
       );

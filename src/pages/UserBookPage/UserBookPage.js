@@ -104,34 +104,35 @@ class UserBookPage extends React.Component {
 
       return (
         <>
-          
-          <div className='book-details__container'>
-            <img src={book_image} alt={title} className="book-details__image"></img>
-            <div className='book-details_text-wrapper'>
-              <p className='first-word'>Title: <span>{title}</span></p>
-              <p className='first-word'>Author: <span>{author}</span></p>
-              <p className='first-word'>Description: <span>{description}</span></p>
+          <div className='user-book-details'>
+            <div className='user-book-details__container'>
+              <img src={book_image} alt={title} className="user-book-details__image"></img>
+              <div className='user-book-details_text-wrapper'>
+                <p className='first-word'>Title: <span>{title}</span></p>
+                <p className='first-word'>Author: <span>{author}</span></p>
+                <p className='first-word'>Description: <span>{description}</span></p>
 
-              {userId == currentUserId && <ShelveInput shelveChangeHandler={this.shelveChangeHandler} routerProps={this.props.routerProps} singleUserBook={this.state.singleUserBook} />}
-            </div>
-
-            <div className='book-details__notes-bigcontainer'>
-
-              <p className='first-word'>Notes:</p>
-              <div onClick={this.editHandleButton} className='book-details__notes-container'>
-                <p className='book-details__notes'>{this.state.singleUserBook.notes}</p>
+                {userId == currentUserId && <ShelveInput shelveChangeHandler={this.shelveChangeHandler} routerProps={this.props.routerProps} singleUserBook={this.state.singleUserBook} />}
               </div>
+
+              <div className='user-book-details__notes-bigcontainer'>
+
+                <p className='first-word'>Notes:</p>
+                <div onClick={this.editHandleButton} className='book-details__notes-container'>
+                  <p className='user-book-details__notes'>{this.state.singleUserBook.notes}</p>
+                </div>
+              </div>
+
+              {userId == currentUserId &&
+                <div className='user-book-details__button-container'>
+                  {/* <Link to={`/users/${userId}/${bookId}/edit`}> */}
+                  <button onClick={this.editHandleButton} className='button'><img className='icon' src={editIcon} alt="edit icon"></img>Edit Note</button>
+                  <button onClick={this.deleteButtonHandler} className='button'><img className='icon' src={deleteIcon} alt="delete icon"></img>Delete Book</button>
+
+                </div>}
+
+
             </div>
-
-            {userId == currentUserId &&
-              <div className='book-details__button-container'>
-                {/* <Link to={`/users/${userId}/${bookId}/edit`}> */}
-                <button onClick={this.editHandleButton} className='button'><img className='icon' src={editIcon} alt="edit icon"></img></button>
-                <button onClick={this.deleteButtonHandler} className='button'><img className='icon' src={deleteIcon} alt="delete icon"></img></button>
-
-              </div>}
-
-
           </div>
         </>
       );
