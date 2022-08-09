@@ -4,8 +4,26 @@ import { Link } from "react-router-dom";
 
 class HomePage extends React.Component {
 
+  state= {
+    fictionCategory: true,
+    nonFictionCategory: false
+  }
 
+  fictionHandler = ()=>{
+    this.setState({
+      fictionCategory: true,
+      nonFictionCategory:false
+    })
+    this.props.handleFiction();
+  }
 
+  nonFictionHandler = ()=>{
+    this.setState({
+      fictionCategory: false,
+      nonFictionCategory:true
+    })
+    this.props.handleNonFiction();
+  }
 
   render() {
 console.log(this.props.list)
@@ -15,6 +33,14 @@ console.log(this.props.list)
       return (
         <>
           <h1 className='books-home__title'>Best Sellers List</h1>
+          <div className='books-home__button-wrapper'>
+            <button onClick={this.fictionHandler} className="books-home__button">Fiction</button>
+            <button onClick={this.nonFictionHandler} className="books-home__button">Non Fiction</button>
+
+          </div>
+
+
+
           <ul className='books-home__image-container'>
 
             {this.props.list.map((book, index) => {

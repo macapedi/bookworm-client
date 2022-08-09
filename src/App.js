@@ -39,7 +39,7 @@ class App extends React.Component {
     //Data from json files
     const usersReq = await axios.get("http://localhost:8080/users");
     const usersResp = usersReq.data;
-    
+
 
 
 
@@ -60,12 +60,12 @@ class App extends React.Component {
   };
 
   // async componentDidUpdate() {
-    
+
   //   const userId = this.props.routerProps.match.params.id;
   //   const userBookListReq = await axios.get(`http://localhost:8080/users/${userId}`);
 
   //   const userBookList = userBookListReq.data.inventoryBooks;
-   
+
   //   this.setState({
   //     userBookList
   //   })
@@ -85,14 +85,34 @@ class App extends React.Component {
       userBooks: booksResp,
     });
   }
+  handleFiction = async () => {
+    const url = 'https://api.nytimes.com/svc/books/v3/lists/current/hardcover-fiction.json'
+    const key = "?api-key=MPpcrAgZYL3NCtOTzOVpM9K9D4DJGWee"
+    const response = await axios.get(`${url}${key}`)
+    const booksList = response.data.results.books;
+    this.setState({
+      booksList,
+      list: response.data.results.books,
+    })
+  }
 
- 
+  handleNonFiction = async () =>{
+
+    const url = 'https://api.nytimes.com/svc/books/v3/lists/current/hardcover-nonfiction.json'
+    const key = "?api-key=MPpcrAgZYL3NCtOTzOVpM9K9D4DJGWee"
+    const response = await axios.get(`${url}${key}`)
+    const booksList = response.data.results.books;
+    this.setState({
+      booksList,
+      list: response.data.results.books,
+    })
+  }
 
 
 
 
   render() {
-console.log(this.state.usersBooks);
+    console.log(this.state.usersBooks);
 
 
     return (
@@ -112,7 +132,11 @@ console.log(this.state.usersBooks);
                 <HomePage
                   list={this.state.list}
                   booksList={this.state.booksList}
-                  routerProps={routerProps} />
+                  routerProps={routerProps}
+                  handleFiction={this.handleFiction}
+                  handleNonFiction={this.handleNonFiction}
+                  
+                  />
               );
             }}
             />
@@ -148,17 +172,17 @@ console.log(this.state.usersBooks);
             <Route path="/users/:id/:bookId" exact render={(routerProps) => {
               return (
                 <UserBookPage
-                  
+
                   usersList={this.state.usersList}
                   userBooks={this.state.userBooks}
                   routerProps={routerProps} />
               );
             }}
             />
-             <Route path="/users/:id/:bookId/edit" exact render={(routerProps) => {
+            <Route path="/users/:id/:bookId/edit" exact render={(routerProps) => {
               return (
                 <UserBookPageEdit
-                  
+
                   usersList={this.state.usersList}
                   userBooks={this.state.userBooks}
                   routerProps={routerProps} />

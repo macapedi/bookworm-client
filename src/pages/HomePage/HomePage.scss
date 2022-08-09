@@ -86,4 +86,35 @@ p {
         }
     }
 
+
+    &__button {
+        display: flex;
+        color: white;
+        font-size: 1rem;
+        text-decoration: none;
+        text-align: center;
+        border-radius: 50px;
+        min-width: 150px;
+        min-height: 3rem;
+        background-color: black;
+        border-radius: 4px;
+
+
+        //on hover
+        &:hover {
+            text-decoration: underline;
+        }
+
+        &--selected {
+            color: $white;
+            background-color: $black;
+            text-decoration: underline;
+
+            @include tablet {}
+
+            @include desktop {
+                padding-bottom: 0;
+            }
+        }
+    }
 }
