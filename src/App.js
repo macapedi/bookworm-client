@@ -22,19 +22,47 @@ class App extends React.Component {
     usersList: "",
     usersBooks: "",
     booksList: [],
-    list: []
+    list: [],
+
+
+    user: {},
+    failedAuth: false,
 
   }
 
   async componentDidMount() {
-    
+
+    //authentication
+
+    const token = sessionStorage.getItem('token');
+
+    if (!token) {
+      this.setState({ failedAuth: true });
+      return;
+    }
+
+    // Get the data from the API
+    try {
+      const userData = await axios.get('http://localhost:8080/api/users/current', {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      this.setState({
+        user: userData.data,
+      })
+    } catch (error) {
+      this.setState({
+        failedAuth: true,
+      });
+      return;
+    }
+
 
     const url = 'https://api.nytimes.com/svc/books/v3/lists/current/hardcover-fiction.json'
     const key = "?api-key=MPpcrAgZYL3NCtOTzOVpM9K9D4DJGWee"
     const response = await axios.get(`${url}${key}`)
     const booksList = response.data.results.books;
-
-
 
 
     //Data from json files
@@ -47,10 +75,8 @@ class App extends React.Component {
     const booksReq = await axios.get("http://localhost:8080/books");
     const booksResp = booksReq.data;
 
-
-
-
     this.setState({
+
       booksList,
       list: response.data.results.books,
       usersList: usersResp,
@@ -97,7 +123,7 @@ class App extends React.Component {
     })
   }
 
-  handleNonFiction = async () =>{
+  handleNonFiction = async () => {
 
     const url = 'https://api.nytimes.com/svc/books/v3/lists/current/hardcover-nonfiction.json'
     const key = "?api-key=MPpcrAgZYL3NCtOTzOVpM9K9D4DJGWee"
@@ -109,36 +135,50 @@ class App extends React.Component {
     })
   }
 
+  handleLogout = () => {
+    sessionStorage.removeItem('token');
+    this.setState({
+      user: null,
+      failedAuth: true,
+    });
+  };
+
 
 
 
   render() {
-    console.log(this.state.usersBooks);
+
+
+    const { id, email } = this.state.user;
+
+    console.log(id, email);
+
 
 
     return (
-      <div className="App">
+      <div className="App" >
         <BrowserRouter>
-          <Header />
+          <Header handleLogout={this.handleLogout} />
           <Switch>
             <Route exact path="/">
               <Redirect to="/login" />
             </Route>
-            <Route path="/login" exact component={Login} />
+            <Route path="/login">
+              <Login />
+            </Route>
+
             <Route path="/signup">
               <Signup />
             </Route>
             <Route path="/books" exact render={(routerProps) => {
-              return (
-                <HomePage
-                  list={this.state.list}
-                  booksList={this.state.booksList}
-                  routerProps={routerProps}
-                  handleFiction={this.handleFiction}
-                  handleNonFiction={this.handleNonFiction}
-                  
-                  />
-              );
+              return (this.state.failedAuth ? <Redirect to="/login" /> : <HomePage
+                list={this.state.list}
+                booksList={this.state.booksList}
+                routerProps={routerProps}
+                handleFiction={this.handleFiction}
+                handleNonFiction={this.handleNonFiction}
+
+              />);
             }}
             />
 
@@ -156,14 +196,20 @@ class App extends React.Component {
               return (
                 <PublicShelvesPage
                   usersList={this.state.usersList}
-                  routerProps={routerProps} />
+                  routerProps={routerProps}
+                // userName={name}
+
+                />
               );
             }}
             />
 
             <Route path="/users/:id" exact render={(routerProps) => {
+              console.log("id from params",routerProps.match.params.id)
+              const urlId = routerProps.match.params.id;
               return (
                 <UserPage
+                  userId={urlId== "me"?id:urlId}
                   usersList={this.state.usersList}
                   userBooks={this.state.userBooks}
                   routerProps={routerProps} />
@@ -190,9 +236,6 @@ class App extends React.Component {
               );
             }}
             />
-
-
-
 
           </Switch>
         </BrowserRouter>

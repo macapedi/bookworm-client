@@ -12,9 +12,24 @@ class Signup extends Component {
 
     handleSubmit = (event) => {
         event.preventDefault();
-        this.setState({
-            success: true
+
+        console.log("this is submitting")
+        axios
+        .post("http://localhost:8080/api/users/register", {
+            email: event.target.email.value,
+            password: event.target.password.value,
+           
+           
         })
+        .then(() => {
+            console.log("submit succesful")
+            this.setState({ success: true, error: "" });
+            event.target.reset();
+        })
+        .catch((error) => {
+            console.log(error)
+            this.setState({ success: false, error: error.response ? error.response.data : error.message });
+        });
 
     };
 
@@ -30,7 +45,8 @@ class Signup extends Component {
 
                     <button className="signup__button">Sign up</button>
 
-                    {this.state.success && <Link to="/login">Log in</Link>}
+                    {this.state.success && <div className="signup__message">Signed up!</div>}
+                    {this.state.error && <div className="signup__message">{this.state.error}</div>}
  
                 </form>
                 <p>

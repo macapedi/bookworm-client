@@ -8,12 +8,10 @@ import avatar from "../../assets/images/avatar.png";
 function Header() {
 
 
-  const handleLogout = () => {
+  const logoutHandler = () => {
 
-    this.setState({
-      user: null,
-      failedAuth: true,
-    });
+    this.props.handleLogout();
+    this.props.routerProps.history("/login");
   };
 
 
@@ -30,7 +28,7 @@ function Header() {
       </div>
       <nav className="header__nav-links">
         <NavLink
-          to="/users/2922c286-16cd-4d43-ab98-c79f698aeab0"
+          to="/users/me"
           className={(isActive) =>
             "header__nav-link header__nav-link" +
             (isActive ? "--selected" : "")
@@ -49,7 +47,7 @@ function Header() {
         </NavLink>
         <div className="avatar-tablet__container">
           <img className="avatar-tablet" src={avatar}></img>
-          <Link to="/login"className="avatar-tablet__logout-link">Logout</Link>
+          <Link onClick={logoutHandler} className="avatar-tablet__logout-link">Logout</Link>
         </div>
 
       </nav>

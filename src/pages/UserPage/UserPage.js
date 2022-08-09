@@ -51,7 +51,7 @@ class UserPage extends React.Component {
 
 
 
-    const userId = this.props.routerProps.match.params.id;
+    const userId = this.props.userId
 
     console.log("this is user id", userId);
     console.log("this is prevState", prevState);
@@ -84,13 +84,17 @@ class UserPage extends React.Component {
 
 
   render() {
-    const userId = this.props.routerProps.match.params.id;
+    const userId = this.props.userId;
     const users = this.props.usersList;
 
     if (this.props.usersList && this.state.userBookList) {
 
+   
+      console.log("this is userid and users",userId, users);
 
-      const singleUser = users.filter((user) => userId === user.id);
+
+      const singleUser = users.filter((user) => userId == user.id);
+      console.log("this is userid and users",userId, users, singleUser);
       const { name } = singleUser[0];
 
       return (
