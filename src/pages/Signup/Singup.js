@@ -18,6 +18,7 @@ class Signup extends Component {
         .post("http://localhost:8080/api/users/register", {
             email: event.target.email.value,
             password: event.target.password.value,
+            name: event.target.name.value
            
            
         })

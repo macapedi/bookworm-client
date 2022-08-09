@@ -52,7 +52,7 @@ class StateInput extends React.Component {
                 author: newFilteredBook.author,
                 status: event.target.value,
                 book_image: newFilteredBook.book_image,
-                user_id: "2922c286-16cd-4d43-ab98-c79f698aeab0",
+                user_id: this.props.userId,
                 description: newFilteredBook.description,
                 primary_isbn10: bookId,
                 rank: newFilteredBook.rank,

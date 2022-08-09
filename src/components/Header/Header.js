@@ -5,13 +5,12 @@ import avatar from "../../assets/images/avatar.png";
 
 
 
-function Header() {
+function Header(props) {
 
 
   const logoutHandler = () => {
-
-    this.props.handleLogout();
-    this.props.routerProps.history("/login");
+    props.handleLogout();
+   
   };
 
 
@@ -47,7 +46,7 @@ function Header() {
         </NavLink>
         <div className="avatar-tablet__container">
           <img className="avatar-tablet" src={avatar}></img>
-          <Link onClick={logoutHandler} className="avatar-tablet__logout-link">Logout</Link>
+          <button className="avatar-tablet__logout-link" onClick={logoutHandler}>Logout</button>
         </div>
 
       </nav>

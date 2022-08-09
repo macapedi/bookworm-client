@@ -33,7 +33,7 @@ class BookDetailsPage extends React.Component {
   render() {
 
 
-
+console.log(this.props.userId);
 
     if (this.props.booksList.length) {
 
@@ -57,7 +57,7 @@ class BookDetailsPage extends React.Component {
                 <p className='first-word'>Author: <span>{author}</span></p>
                 <p className='first-word'>Description: <span>{description}</span></p>
 
-                <StateInput statusChangeHandler={this.props.statusChangeHandler} routerProps={this.props.routerProps} booksList={this.props.booksList} />
+                <StateInput statusChangeHandler={this.props.statusChangeHandler} routerProps={this.props.routerProps} booksList={this.props.booksList} userId={this.props.userId} />
 
               </div>
             </div>

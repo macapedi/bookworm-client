@@ -86,18 +86,60 @@ class App extends React.Component {
 
   };
 
-  // async componentDidUpdate() {
+  async componentDidUpdate(_prevProps, prevState) {
 
-  //   const userId = this.props.routerProps.match.params.id;
-  //   const userBookListReq = await axios.get(`http://localhost:8080/users/${userId}`);
+    //authentication
+    const id = this.state.user.id
+    const token = sessionStorage.getItem('token');
 
-  //   const userBookList = userBookListReq.data.inventoryBooks;
+    if (!token) {
+      this.setState({ failedAuth: true });
+      return;
+    }
 
-  //   this.setState({
-  //     userBookList
-  //   })
+    // if (id !== prevState.user.id) {
 
-  // }
+    //   // Get the data from the API
+    //   try {
+    //     const userData = await axios.get('http://localhost:8080/api/users/current', {
+    //       headers: {
+    //         Authorization: `Bearer ${token}`,
+    //       },
+    //     })
+    //     this.setState({
+    //       user: userData.data,
+    //     })
+    //   } catch (error) {
+    //     this.setState({
+    //       failedAuth: true,
+    //     });
+    //     return;
+    //   }
+
+    //   const url = 'https://api.nytimes.com/svc/books/v3/lists/current/hardcover-fiction.json'
+    //   const key = "?api-key=MPpcrAgZYL3NCtOTzOVpM9K9D4DJGWee"
+    //   const response = await axios.get(`${url}${key}`)
+    //   const booksList = response.data.results.books;
+
+
+    //   //Data from json files
+    //   const usersReq = await axios.get("http://localhost:8080/users");
+    //   const usersResp = usersReq.data;
+
+    //   const booksReq = await axios.get("http://localhost:8080/books");
+    //   const booksResp = booksReq.data;
+
+    //   this.setState({
+
+    //     booksList,
+    //     list: response.data.results.books,
+    //     usersList: usersResp,
+    //     usersBooks: booksResp,
+
+    //   })
+    // };
+
+  }
 
   statusChangeHandler = async () => {
 
@@ -149,9 +191,9 @@ class App extends React.Component {
   render() {
 
 
-    const { id, email } = this.state.user;
+    const { id, email, name } = this.state.user;
 
-    console.log(id, email);
+    console.log(id, email, name);
 
 
 
@@ -163,9 +205,10 @@ class App extends React.Component {
             <Route exact path="/">
               <Redirect to="/login" />
             </Route>
-            <Route path="/login">
-              <Login />
-            </Route>
+            {this.state.failedAuth &&
+              <Route path="/login">
+                <Login />
+              </Route>}
 
             <Route path="/signup">
               <Signup />
@@ -185,6 +228,7 @@ class App extends React.Component {
             <Route path="/books/:id" exact render={(routerProps) => {
               return (
                 <BookDetailsPage
+                  userId={id}
                   statusChangeHandler={this.statusChangeHandler}
                   list={this.state.list}
                   booksList={this.state.booksList}
@@ -205,11 +249,12 @@ class App extends React.Component {
             />
 
             <Route path="/users/:id" exact render={(routerProps) => {
-              console.log("id from params",routerProps.match.params.id)
+              console.log("id from params", routerProps.match.params.id)
               const urlId = routerProps.match.params.id;
               return (
                 <UserPage
-                  userId={urlId== "me"?id:urlId}
+                  userName={name}
+                  userId={urlId == "me" ? id : urlId}
                   usersList={this.state.usersList}
                   userBooks={this.state.userBooks}
                   routerProps={routerProps} />

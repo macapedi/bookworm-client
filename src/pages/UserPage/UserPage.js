@@ -21,8 +21,11 @@ class UserPage extends React.Component {
 
   async componentDidMount() {
 
-    const userId = this.props.routerProps.match.params.id;
-    const userBookListReq = await axios.get(`http://localhost:8080/users/${userId}`);
+    const id = this.props.userId;
+   
+
+    const urlId = this.props.routerProps.match.params.id;
+    const userBookListReq = await axios.get(`http://localhost:8080/users/${(urlId == "me" )? id : urlId}`);
 
     const userBookList = userBookListReq.data.inventoryBooks;
     console.log(userBookList);
@@ -41,8 +44,7 @@ class UserPage extends React.Component {
       wishList,
       readingList,
       droppedList,
-      currentUser: userId
-
+      currentUser: id
     })
 
   }
@@ -51,14 +53,16 @@ class UserPage extends React.Component {
 
 
 
-    const userId = this.props.userId
+    const id = this.props.userId;
+    const urlId = this.props.routerProps.match.params.id;
 
-    console.log("this is user id", userId);
+    console.log( typeof urlId);
+    console.log(id);
     console.log("this is prevState", prevState);
 
 
-    if (userId !== prevState.currentUser) {
-      const userBookListReq = await axios.get(`http://localhost:8080/users/${userId}`);
+    if (id !== prevState.currentUser) {
+      const userBookListReq = await axios.get(`http://localhost:8080/users/${(urlId == "me") ? id : urlId}`);
 
       const userBookList = userBookListReq.data.inventoryBooks;
       console.log(userBookList);
@@ -76,7 +80,7 @@ class UserPage extends React.Component {
         wishList,
         readingList,
         droppedList,
-        currentUser: userId
+        currentUser: id
       })
     }
   }
@@ -95,7 +99,7 @@ class UserPage extends React.Component {
 
       const singleUser = users.filter((user) => userId == user.id);
       console.log("this is userid and users",userId, users, singleUser);
-      const { name } = singleUser[0];
+      const name= this.props.userName;
 
       return (
         <main className='user'>
