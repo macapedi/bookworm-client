@@ -47,13 +47,13 @@ class UserPage extends React.Component {
 
   }
 
-  async componentDidUpdate(_prevProps,prevState) {
+  async componentDidUpdate(_prevProps, prevState) {
 
 
 
     const userId = this.props.routerProps.match.params.id;
 
-    console.log("this is user id",userId);
+    console.log("this is user id", userId);
     console.log("this is prevState", prevState);
 
 
@@ -95,15 +95,16 @@ class UserPage extends React.Component {
 
       return (
         <main className='user'>
+          <div className='user__title-badge-container'>
+            <h1 className='user__title'>{name}'s Shelves</h1>
+            {this.state.finishedList &&
+              <div className='user__badge'>
+                <p className='user__books-finished-text'><span className='user__books-finished'>{this.state.finishedList.length}</span> BOOKS FINISHED</p>
+                <img src={babyWorm} alt="baby worm bage" className='badge'></img>
 
-          <h1 className='user__title'>{name}'s Shelves</h1>
-          {this.state.finishedList &&
-            <div className='user__badge'>
-              <p>Total of {this.state.finishedList.length} books finished</p>
-              <img src={babyWorm} alt="baby worm bage" className='badge'></img>
-
-            </div>
-          }
+              </div>
+            }
+          </div>
 
           {this.state.readingList &&
             <>
