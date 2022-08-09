@@ -10,9 +10,9 @@ class Login extends Component {
 
     handleSubmit = (event) => {
         event.preventDefault();
-this.setState({
-  success: true,
-})
+        this.setState({
+            success: true,
+        })
     };
 
     render() {
