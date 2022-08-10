@@ -90,7 +90,7 @@ class UserBookPageEdit extends React.Component {
                 author: singleUserBook.author,
                 status: singleUserBook.status,
                 book_image: singleUserBook.book_image,
-                user_id: "2922c286-16cd-4d43-ab98-c79f698aeab0",
+                user_id: "8",
                 description: singleUserBook.description,
                 primary_isbn10: bookId,
                 rank: singleUserBook.rank,
@@ -120,7 +120,7 @@ class UserBookPageEdit extends React.Component {
     render() {
 
         const userId = this.props.routerProps.match.params.id;
-        const currentUserId = "2922c286-16cd-4d43-ab98-c79f698aeab0";
+        const currentUserId = "8";
 
         if (this.state.singleUserBook) {
 
@@ -130,32 +130,35 @@ class UserBookPageEdit extends React.Component {
 
 
             return (
-                <>
-                    <h1 className='book-details__title'>Book Details for Specific User</h1>
+                <>       
+                <div className='book-details'>
                     <div className='book-details__container'>
                         <img src={book_image} alt={title} className="book-details__image"></img>
-                        <div className='book-details_text-wrapper'>
-                            <p className='first-word'>Title: <span>{title}</span></p>
-                            <p className='first-word'>Author: <span>{author}</span></p>
-                            <p className='first-word'>Description: <span>{description}</span></p>
+                        <div>
+                            <div className='book-details_text-wrapper'>
+                                <p className='first-word'>Title: <span>{title}</span></p>
+                                <p className='first-word'>Author: <span>{author}</span></p>
+                                <p className='first-word'>Description: <span>{description}</span></p>
 
-                            {userId == currentUserId && <ShelveInput shelveChangeHandler={this.shelveChangeHandler} routerProps={this.props.routerProps} singleUserBook={this.state.singleUserBook} />}
-                        </div>
-                        <div className='book-details__notes-bigcontainer'>
-                            <p className='first-word'>Notes:</p>
+                                {userId == currentUserId && <ShelveInput shelveChangeHandler={this.shelveChangeHandler} routerProps={this.props.routerProps} singleUserBook={this.state.singleUserBook} />}
+                            </div>
+                            <div className='book-details__notes-bigcontainer'>
+                                <p className='first-word'>Notes:</p>
 
-                            <form>
-                                <div className='book-details__notes-container'>
-                                    <textarea onChange={this.notesChangeHandler} className='book-details__notes-editor' name="notes" value={this.state.notes}></textarea>
-                                </div>
-                                <div className='book-details__button-container'>
-                                    <button onClick={this.notesClickHandler} className="button"><img src={saveIcon} alt="save icon" className='icon'></img></button>
-                                    <button onClick={this.cancelButtonHandler} className="button"><img className='icon' src={cancelIcon} alt="cancel icon"></img></button>
-                                </div>
-                            </form>
+                                <form>
+                                    <div className='book-details__notes-container'>
+                                        <textarea onChange={this.notesChangeHandler} className='book-details__notes-editor' name="notes" value={this.state.notes}></textarea>
+                                    </div>
+                                    <div className='book-details__button-container'>
+                                        <button onClick={this.notesClickHandler} className="button"><img src={saveIcon} alt="save icon" className='icon'></img>Save</button>
+                                        <button onClick={this.cancelButtonHandler} className="button"><img className='icon' src={cancelIcon} alt="cancel icon"></img>Cancel</button>
+                                    </div>
+                                </form>
+                            </div>
 
                         </div>
                     </div>
+                </div>
                 </>
             );
         } else {
