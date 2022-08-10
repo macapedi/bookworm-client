@@ -5,9 +5,10 @@ import avatar from "../../assets/images/avatar.png";
 
 
 
+
+
+
 function Header(props) {
-
-
   const logoutHandler = () => {
     props.handleLogout();
    
@@ -22,7 +23,7 @@ function Header(props) {
         </NavLink>
         <div className="avatar__container">
           <img className="avatar" src={avatar}></img>
-          <Link to="/login"className="avatar__logout-link">Logout</Link>
+          <button className="avatar-tablet__logout-link" onClick={logoutHandler}>Logout</button>
         </div>
       </div>
       <nav className="header__nav-links">

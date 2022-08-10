@@ -1,6 +1,6 @@
 import "./Login.scss";
 import { Component } from "react";
-import { Link, Redirect } from "react-router-dom";
+import { Link, Redirect , useHistory} from "react-router-dom";
 import axios from "axios";
 import Input from "../../components/Input/Input";
 
@@ -9,6 +9,8 @@ class Login extends Component {
         error: "",
         success: false,
     };
+
+
 
     handleSubmit = (event) => {
         event.preventDefault();
@@ -21,6 +23,7 @@ class Login extends Component {
             .then((response) => {
                 sessionStorage.setItem("token", response.data.token);
                 this.setState({ success: true });
+                this.routerProps.history.push("/books");
             })
             .catch((error) => {
                 this.setState({ error: error.response ? error.response.data : error.message });
@@ -39,7 +42,7 @@ class Login extends Component {
                     <button className="login__button">Log in</button>
 
                     {this.state.error && <div className="login__message">{this.state.error}</div>}
-                    {this.state.success && <Redirect to="/books" />}
+                    {/* {this.state.success && <Redirect to="/books" />} */}
                 </form>
                 <p>
                     Need an account? <Link to="/signup">Sign up</Link>

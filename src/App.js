@@ -183,6 +183,7 @@ class App extends React.Component {
       user: null,
       failedAuth: true,
     });
+    this.routerProps.history.push('/login');
   };
 
 
@@ -205,10 +206,11 @@ class App extends React.Component {
             <Route exact path="/">
               <Redirect to="/login" />
             </Route>
-            {this.state.failedAuth &&
-              <Route path="/login">
-                <Login />
-              </Route>}
+
+            <Route path="/login" exact render={(routerProps) => {
+              return (this.state.failedAuth && <Login  routerProps={routerProps} />)
+            }} />
+
 
             <Route path="/signup">
               <Signup />
@@ -253,7 +255,7 @@ class App extends React.Component {
               const urlId = routerProps.match.params.id;
               return (
                 <UserPage
-                  userName={name}
+
                   userId={urlId == "me" ? id : urlId}
                   usersList={this.state.usersList}
                   userBooks={this.state.userBooks}
@@ -264,7 +266,7 @@ class App extends React.Component {
             <Route path="/users/:id/:bookId" exact render={(routerProps) => {
               return (
                 <UserBookPage
-
+                  userId={id}
                   usersList={this.state.usersList}
                   userBooks={this.state.userBooks}
                   routerProps={routerProps} />
