@@ -86,8 +86,8 @@ class App extends React.Component {
       userBooks: booksResp,
     });
   }
-  handleFiction = async () => {
-    const url = 'https://api.nytimes.com/svc/books/v3/lists/current/hardcover-fiction.json'
+  handleFiction = async (date) => {
+    const url = `https://api.nytimes.com/svc/books/v3/lists/${date}/hardcover-fiction.json`
     const key = "?api-key=MPpcrAgZYL3NCtOTzOVpM9K9D4DJGWee"
     const response = await axios.get(`${url}${key}`)
     const booksList = response.data.results.books;
@@ -97,9 +97,9 @@ class App extends React.Component {
     })
   }
 
-  handleNonFiction = async () =>{
+  handleNonFiction = async (date) =>{
 
-    const url = 'https://api.nytimes.com/svc/books/v3/lists/current/hardcover-nonfiction.json'
+    const url = `https://api.nytimes.com/svc/books/v3/lists/${date}/hardcover-nonfiction.json`
     const key = "?api-key=MPpcrAgZYL3NCtOTzOVpM9K9D4DJGWee"
     const response = await axios.get(`${url}${key}`)
     const booksList = response.data.results.books;

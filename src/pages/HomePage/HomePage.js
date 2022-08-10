@@ -6,78 +6,96 @@ class HomePage extends React.Component {
 
   state = {
     fictionCategory: false,
-    nonFictionCategory: false
+    nonFictionCategory: false,
+    date: "current"
   }
 
   fictionHandler = () => {
+    const date= this.state.date;
     this.setState({
       fictionCategory: true,
       nonFictionCategory: false
     })
-    this.props.handleFiction();
+    this.props.handleFiction(date);
   }
 
   nonFictionHandler = () => {
+
+    const date= this.state.date;
     this.setState({
       fictionCategory: false,
       nonFictionCategory: true
     })
-    this.props.handleNonFiction();
+    this.props.handleNonFiction(date);
   }
 
-  render() {
-    console.log(this.props.list)
+  dateHandler = (event) => {
+    this.setState({
+      date: event.target.value
+    });
 
-    if (this.props.list.length) {
-
-      return (
-        <>
-          <div className='books-home'>
-            <h1 className='books-home__title'> NYT Best Sellers</h1>
-            <div className='books-home__button-wrapper'>
-              <button onClick={this.fictionHandler} className={
-                "books-home__button books-home__button" +
-                (this.state.fictionCategory === true ? "--selected" : "")}><span className='books-home__button-text'>Fiction</span></button>
-              <button onClick={this.nonFictionHandler} className={
-                "books-home__button books-home__button" +
-                (this.state.nonFictionCategory === true ? "--selected" : "")}><span className='books-home__button-text'>Non Fiction</span></button>
-
-            </div>
+  }
 
 
+render() {
+  console.log(this.props.list)
+  console.log(this.state.date)
 
+  if (this.props.list.length) {
 
-            <ul className='books-home__image-container'>
-
-              {this.props.list.map((book, index) => {
-
-
-                return (
-
-
-                  <li key={book.primary_isbn10} className="books-home__container">
-                    <Link to={`/books/${book.primary_isbn10}`} className='books-home__container'>
-
-                      <div className='books-home__wrapper'>
-                        {/* <p className='books__rank'> {book.rank}</p> */}
-                        <img className='books-home__image' src={book.book_image}></img>
-                      </div>
-
-                    </Link>
-                  </li>
-                )
-
-              })}
-
-            </ul>
+    return (
+      <>
+        <div className='books-home'>
+          <h1 className='books-home__title'> NYT Best Sellers</h1>
+          <div className='books-home__button-wrapper'>
+            <button onClick={this.fictionHandler} className={
+              "books-home__button books-home__button" +
+              (this.state.fictionCategory === true ? "--selected" : "")}><span className='books-home__button-text'>Fiction</span></button>
+            <button onClick={this.nonFictionHandler} className={
+              "books-home__button books-home__button" +
+              (this.state.nonFictionCategory === true ? "--selected" : "")}><span className='books-home__button-text'>Non Fiction</span></button>
+            <select value={this.state.value} onChange={this.dateHandler}>
+              <option value="2022-01-01">2022-01-01</option>
+              <option value="2022-02-01">2022-02-01</option>
+              <option selected value="current">Current</option>
+              <option value="2022-03-01">2022-03-01</option>
+            </select>
           </div>
 
-        </>
-      );
-    } else {
-      return <p>Loading...</p>
-    }
+
+
+
+          <ul className='books-home__image-container'>
+
+            {this.props.list.map((book, index) => {
+
+
+              return (
+
+
+                <li key={book.primary_isbn10} className="books-home__container">
+                  <Link to={`/books/${book.primary_isbn10}`} className='books-home__container'>
+
+                    <div className='books-home__wrapper'>
+                      {/* <p className='books__rank'> {book.rank}</p> */}
+                      <img className='books-home__image' src={book.book_image}></img>
+                    </div>
+
+                  </Link>
+                </li>
+              )
+
+            })}
+
+          </ul>
+        </div>
+
+      </>
+    );
+  } else {
+    return <p>Loading...</p>
   }
+}
 }
 
 export default HomePage;
