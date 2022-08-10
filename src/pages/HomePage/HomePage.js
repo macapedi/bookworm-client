@@ -59,6 +59,10 @@ render() {
               <option value="2022-02-01">2022-02-01</option>
               <option selected value="current">Current</option>
               <option value="2022-03-01">2022-03-01</option>
+              <option value="2022-04-01">2022-04-01</option>
+              <option value="2022-05-01">2022-05-01</option>
+              <option value="2022-06-01">2022-06-01</option>
+              <option value="2022-07-01">2022-07-01</option>
             </select>
           </div>
 
