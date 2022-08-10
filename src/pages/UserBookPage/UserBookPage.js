@@ -31,22 +31,22 @@ class UserBookPage extends React.Component {
     })
 
   }
-  // async componentDidUpdate() {
-  //   const userId = this.props.routerProps.match.params.id;
-  //   const bookId = this.props.routerProps.match.params.bookId;
+  async componentDidUpdate() {
+    const userId = this.props.routerProps.match.params.id;
+    const bookId = this.props.routerProps.match.params.bookId;
 
 
-  //   const booksRequest = await axios.get("http://localhost:8080/books");
+    const booksRequest = await axios.get("http://localhost:8080/books");
 
-  //   const books = booksRequest.data;
+    const books = booksRequest.data;
 
-  //   const singleUserBook = books.filter((book) => book.user_id == userId && bookId == book.primary_isbn10);
+    const singleUserBook = books.filter((book) => book.user_id == userId && bookId == book.primary_isbn10);
 
-  //   this.setState({
-  //     singleUserBook: singleUserBook[0]
-  //   })
+    this.setState({
+      singleUserBook: singleUserBook[0]
+    })
 
-  // }
+  }
 
 
 
@@ -107,31 +107,32 @@ class UserBookPage extends React.Component {
           <div className='user-book-details'>
             <div className='user-book-details__container'>
               <img src={book_image} alt={title} className="user-book-details__image"></img>
-              <div className='user-book-details_text-wrapper'>
-                <p className='first-word'>Title: <span>{title}</span></p>
-                <p className='first-word'>Author: <span>{author}</span></p>
-                <p className='first-word'>Description: <span>{description}</span></p>
+              <div>
+                <div className='user-book-details_text-wrapper'>
+                  <p className='first-word'>Title: <span>{title}</span></p>
+                  <p className='first-word'>Author: <span>{author}</span></p>
+                  <p className='first-word'>Description: <span>{description}</span></p>
 
-                {userId == currentUserId && <ShelveInput shelveChangeHandler={this.shelveChangeHandler} routerProps={this.props.routerProps} singleUserBook={this.state.singleUserBook} />}
-              </div>
-
-              <div className='user-book-details__notes-bigcontainer'>
-
-                <p className='first-word'>Notes:</p>
-                <div onClick={this.editHandleButton} className='book-details__notes-container'>
-                  <p className='user-book-details__notes'>{this.state.singleUserBook.notes}</p>
+                  {userId == currentUserId && <ShelveInput shelveChangeHandler={this.shelveChangeHandler} routerProps={this.props.routerProps} singleUserBook={this.state.singleUserBook} />}
                 </div>
+
+
+                <div className='user-book-details__notes-bigcontainer'>
+
+                  <p className='first-word'>Notes:</p>
+                  <div onClick={this.editHandleButton} className='book-details__notes-container'>
+                    <p className='user-book-details__notes'>{this.state.singleUserBook.notes}</p>
+                  </div>
+                </div>
+
+                {userId == currentUserId &&
+                  <div className='user-book-details__button-container'>
+                    {/* <Link to={`/users/${userId}/${bookId}/edit`}> */}
+                    <button onClick={this.editHandleButton} className='button'><img className='icon' src={editIcon} alt="edit icon"></img>Edit Note</button>
+                    <button onClick={this.deleteButtonHandler} className='button'><img className='icon' src={deleteIcon} alt="delete icon"></img>Delete Book</button>
+
+                  </div>}
               </div>
-
-              {userId == currentUserId &&
-                <div className='user-book-details__button-container'>
-                  {/* <Link to={`/users/${userId}/${bookId}/edit`}> */}
-                  <button onClick={this.editHandleButton} className='button'><img className='icon' src={editIcon} alt="edit icon"></img>Edit Note</button>
-                  <button onClick={this.deleteButtonHandler} className='button'><img className='icon' src={deleteIcon} alt="delete icon"></img>Delete Book</button>
-
-                </div>}
-
-
             </div>
           </div>
         </>

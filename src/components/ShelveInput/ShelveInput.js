@@ -49,7 +49,7 @@ class ShelveInput extends React.Component {
                 author: book.author,
                 status: event.target.value,
                 book_image: book.book_image,
-                user_id: "2922c286-16cd-4d43-ab98-c79f698aeab0",
+                user_id: "8",
                 description: book.description,
                 primary_isbn10: bookId,
                 rank: book.rank,
