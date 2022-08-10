@@ -2,6 +2,7 @@ import "./Login.scss";
 import { Component } from "react";
 import { Link, Redirect } from "react-router-dom";
 import Input from "../../components/Input/Input";
+import axios from "axios";
 class Login extends Component {
     state = {
         error: "",
@@ -10,9 +11,18 @@ class Login extends Component {
 
     handleSubmit = (event) => {
         event.preventDefault();
-        this.setState({
-            success: true,
+        axios
+        .post("http://localhost:8080/users/login", {
+            email: event.target.email.value,
+            password: event.target.password.value,
         })
+        .then((response) => {
+            sessionStorage.setItem("token", response.data.token);
+            this.setState({ success: true });
+        })
+        .catch((error) => {
+            this.setState({ error: error.response ? error.response.data : error.message });
+        });
     };
 
     render() {

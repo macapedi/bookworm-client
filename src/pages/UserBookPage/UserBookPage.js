@@ -6,6 +6,7 @@ import ShelveInput from '../../components/ShelveInput/ShelveInput';
 import backIcon from '../../assets/icons/back.svg';
 import deleteIcon from '../../assets/icons/delete.svg';
 import editIcon from '../../assets/icons/edit.svg';
+import jwt_decode from "jwt-decode";
 
 
 class UserBookPage extends React.Component {
@@ -92,7 +93,11 @@ class UserBookPage extends React.Component {
     console.log(this.props.routerProps.match.path);
 
     const userId = this.props.routerProps.match.params.id;
-    const currentUserId = "8";
+
+    const tokenDecoded = jwt_decode(sessionStorage.getItem('token'));
+    console.log(tokenDecoded);
+
+    const currentUserId = tokenDecoded.id; // 
     const bookId = this.props.routerProps.match.params.bookId;
 
     if (this.state.singleUserBook !== "") {

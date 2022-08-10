@@ -22,7 +22,9 @@ class UserPage extends React.Component {
   async componentDidMount() {
 
     const userId = this.props.routerProps.match.params.id;
-    const userBookListReq = await axios.get(`http://localhost:8080/users/${userId}`);
+    const userBookListReq = await axios.get(`http://localhost:8080/users/${userId}`, { headers: {
+      Authorization: `Bearer ${sessionStorage.getItem('token')}`,
+    }});
 
     const userBookList = userBookListReq.data.inventoryBooks;
     console.log(userBookList);
@@ -49,8 +51,6 @@ class UserPage extends React.Component {
 
   async componentDidUpdate(_prevProps, prevState) {
 
-
-
     const userId = this.props.routerProps.match.params.id;
 
     console.log("this is user id", userId);
@@ -58,7 +58,9 @@ class UserPage extends React.Component {
 
 
     if (userId !== prevState.currentUser) {
-      const userBookListReq = await axios.get(`http://localhost:8080/users/${userId}`);
+      const userBookListReq = await axios.get(`http://localhost:8080/users/${userId}`, { headers: {
+        Authorization: `Bearer ${sessionStorage.getItem('token')}`,
+      }});
 
       const userBookList = userBookListReq.data.inventoryBooks;
       console.log(userBookList);

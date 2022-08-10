@@ -2,6 +2,7 @@
 import { NavLink, Link } from "react-router-dom";
 import "./Header.scss";
 import avatar from "../../assets/images/avatar.png";
+import jwt_decode from "jwt-decode";
 
 
 
@@ -15,7 +16,16 @@ function Header() {
       failedAuth: true,
     });
   };
+  // let currentUserId;
 
+  // const tokenDecoded = jwt_decode(sessionStorage.getItem('token'));
+  // if(tokenDecoded) {
+  //   console.log(tokenDecoded);
+  //     currentUserId = tokenDecoded.id; // 
+
+  // }
+  // 
+  const currentUserId = 8; // 
 
   return (
     <header className="header">
@@ -25,12 +35,12 @@ function Header() {
         </NavLink>
         <div className="avatar__container">
           <img className="avatar" src={avatar}></img>
-          <Link to="/login"className="avatar__logout-link">Logout</Link>
+          <Link onClick={handleLogout} className="avatar__logout-link">Logout</Link>
         </div>
       </div>
       <nav className="header__nav-links">
         <NavLink
-          to="/users/8"
+          to={`/users/${currentUserId}`}
           className={(isActive) =>
             "header__nav-link header__nav-link" +
             (isActive ? "--selected" : "")
@@ -49,7 +59,7 @@ function Header() {
         </NavLink>
         <div className="avatar-tablet__container">
           <img className="avatar-tablet" src={avatar}></img>
-          <Link to="/login"className="avatar-tablet__logout-link">Logout</Link>
+          <Link onClick={handleLogout} className="avatar-tablet__logout-link">Logout</Link>
         </div>
 
       </nav>
