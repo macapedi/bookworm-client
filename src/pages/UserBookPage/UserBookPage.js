@@ -92,7 +92,7 @@ class UserBookPage extends React.Component {
     console.log(this.props.routerProps.match.path);
 
     const userId = this.props.routerProps.match.params.id;
-    const currentUserId = "2922c286-16cd-4d43-ab98-c79f698aeab0";
+    const currentUserId = "8";
     const bookId = this.props.routerProps.match.params.bookId;
 
     if (this.state.singleUserBook !== "") {
