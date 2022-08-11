@@ -155,4 +155,10 @@ p {
         width: 100%;
         align-self: center;
     }
+
+    &__dropdown{
+        display: flex;
+        justify-content: center;
+        padding: 0.5rem;
+    }
 }
