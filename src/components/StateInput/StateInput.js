@@ -1,6 +1,7 @@
 import "./StateInput.scss";
 import React from "react";
 import axios from "axios";
+import jwt_decode from "jwt-decode";
 
 
 
@@ -29,7 +30,7 @@ class StateInput extends React.Component {
         const bookId = this.props.routerProps.match.params.id;
 
         const books = this.props.booksList;
-        console.log(event.target.value);
+
 
         if (event.target.name === "status") {
             this.setState({
@@ -41,18 +42,25 @@ class StateInput extends React.Component {
         // const bookFound = this.filteredBook();
 
 
+        let currentUserId;
+
+        const tokenDecoded = jwt_decode(sessionStorage.getItem('token'));
+        console.log(tokenDecoded);
+        currentUserId = tokenDecoded.id;
+
+
 
 
         try {
 
             const newFilteredBook = books.find(book => bookId == book.primary_isbn10);
-            console.log(newFilteredBook);
+
 
             axios.post("http://localhost:8080/books", {
                 author: newFilteredBook.author,
                 status: event.target.value,
                 book_image: newFilteredBook.book_image,
-                user_id: "8",
+                user_id: currentUserId,
                 description: newFilteredBook.description,
                 primary_isbn10: bookId,
                 rank: newFilteredBook.rank,

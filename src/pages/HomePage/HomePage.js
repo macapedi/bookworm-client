@@ -6,7 +6,7 @@ import Footer from "../../components/Footer/Footer.js";
 class HomePage extends React.Component {
 
   state = {
-    fictionCategory: false,
+    fictionCategory: true,
     nonFictionCategory: false,
     date: "current"
   }
@@ -48,15 +48,17 @@ class HomePage extends React.Component {
         <>
           <div className='books-home'>
             <h1 className='books-home__title'> NYT Best Sellers</h1>
-            <div className='books-home__button-wrapper'>
-              <button onClick={this.fictionHandler} className={
-                "books-home__button books-home__button" +
-                (this.state.fictionCategory === true ? "--selected" : "")}><span className='books-home__button-text'>Fiction</span></button>
-              <button onClick={this.nonFictionHandler} className={
-                "books-home__button books-home__button" +
-                (this.state.nonFictionCategory === true ? "--selected" : "")}><span className='books-home__button-text'>Non Fiction</span></button>
+            <div className='books-home__button-container'>
+              <div className='books-home__button-wrapper'>
+                <button onClick={this.fictionHandler} className={
+                  "books-home__button books-home__button" +
+                  (this.state.fictionCategory === true ? "--selected" : "")}><span className='books-home__button-text'>Fiction</span></button>
+                <button onClick={this.nonFictionHandler} className={
+                  "books-home__button books-home__button" +
+                  (this.state.nonFictionCategory === true ? "--selected" : "")}><span className='books-home__button-text'>Non Fiction</span></button>
+              </div>
               <select value={this.state.value} onChange={this.dateHandler} className={"books-home__dropdown"}>
-                <option selected value="current">Current</option>
+                <option value="current">Current</option>
                 <option value="2022-01-01">2022-01-01</option>
                 <option value="2022-02-01">2022-02-01</option>
                 <option value="2022-03-01">2022-03-01</option>
@@ -64,8 +66,10 @@ class HomePage extends React.Component {
                 <option value="2022-05-01">2022-05-01</option>
                 <option value="2022-06-01">2022-06-01</option>
                 <option value="2022-07-01">2022-07-01</option>
+                <option value="2022-08-01">2022-07-01</option>
               </select>
             </div>
+
 
 
 
@@ -94,7 +98,7 @@ class HomePage extends React.Component {
 
             </ul>
           </div>
-          <Footer/>
+          <Footer />
 
         </>
       );

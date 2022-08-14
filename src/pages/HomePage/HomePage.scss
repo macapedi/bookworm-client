@@ -12,12 +12,12 @@ p {
     display: flex;
     flex-direction: column;
     align-items: center;
-  
-    
-    
 
-    @include desktop{
-        
+
+
+
+    @include desktop {
+
         margin: 4rem;
         margin-top: 0;
         justify-content: center;
@@ -33,7 +33,7 @@ p {
         justify-content: center;
         padding: 0;
 
-        @include desktop{
+        @include desktop {
             padding: 4rem;
         }
     }
@@ -80,7 +80,8 @@ p {
 
         @include tablet {
             width: 80%;
-            @include desktop{
+
+            @include desktop {
                 width: 70%;
             }
 
@@ -94,23 +95,46 @@ p {
         @include tablet {
             padding: 2rem;
             padding-bottom: 0rem;
-            @include desktop{
+
+            @include desktop {
                 padding-bottom: 0rem;
                 padding-top: 0;
                 padding-left: 4rem;
                 align-self: flex-start;
-               
+
             }
         }
     }
 
-    &__button-wrapper{
+    &__button-container {
+
         display: flex;
         gap: 1rem;
         padding-left: 1rem;
-        @include tablet{
+        flex-direction: column;
+        align-items: center;
+
+        @include tablet {
+            flex-direction: row;
             padding-left: 2rem;
-            @include desktop{
+
+            @include desktop {
+                padding-left: 4rem;
+                align-self: flex-start;
+            }
+        }
+
+    }
+
+    &__button-wrapper {
+        display: flex;
+        gap: 1rem;
+        padding-left: 1rem;
+
+        @include tablet {
+            padding-left: 2rem;
+
+            @include desktop {
                 padding-left: 4rem;
                 align-self: flex-start;
             }
@@ -150,13 +174,14 @@ p {
             }
         }
     }
-    &__button-text{
+
+    &__button-text {
         justify-self: center;
         width: 100%;
         align-self: center;
     }
 
-    &__dropdown{
+    &__dropdown {
         display: flex;
         justify-content: center;
         padding: 0.5rem;

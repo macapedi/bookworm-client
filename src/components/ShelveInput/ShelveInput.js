@@ -1,6 +1,7 @@
 import "./ShelveInput.scss";
 import React from "react";
 import axios from "axios";
+import jwt_decode from "jwt-decode";
 
 
 
@@ -9,7 +10,8 @@ class ShelveInput extends React.Component {
     state = {
         status: "",
         statusMissing: true,
-        selected: this.props.singleUserBook.status
+        selected: this.props.singleUserBook.status,
+        notes: this.props.singleUserBook.notes
     }
 
 
@@ -41,6 +43,10 @@ class ShelveInput extends React.Component {
             })
         }
 
+        let currentUserId;
+
+        const tokenDecoded = jwt_decode(sessionStorage.getItem('token'));
+        currentUserId = tokenDecoded.id;
        
         try {
 
@@ -49,12 +55,12 @@ class ShelveInput extends React.Component {
                 author: book.author,
                 status: event.target.value,
                 book_image: book.book_image,
-                user_id: "8",
+                user_id: currentUserId,
                 description: book.description,
                 primary_isbn10: bookId,
                 rank: book.rank,
                 title: book.title,
-                notes: ""
+                notes: book.notes
 
             })
                 .then(() => { this.props.shelveChangeHandler() })

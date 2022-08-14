@@ -113,7 +113,7 @@ class App extends React.Component {
 
 
   render() {
-    console.log(this.state.usersBooks);
+    
 
 
     return (
@@ -165,7 +165,7 @@ class App extends React.Component {
               return (
                 <UserPage
                   usersList={this.state.usersList}
-                  userBooks={this.state.userBooks}
+                  userBooks={this.state.usersBooks}
                   routerProps={routerProps} />
               );
             }}
@@ -175,7 +175,7 @@ class App extends React.Component {
                 <UserBookPage
 
                   usersList={this.state.usersList}
-                  userBooks={this.state.userBooks}
+                  userBooks={this.state.usersBooks}
                   routerProps={routerProps} />
               );
             }}
@@ -185,7 +185,7 @@ class App extends React.Component {
                 <UserBookPageEdit
 
                   usersList={this.state.usersList}
-                  userBooks={this.state.userBooks}
+                  userBooks={this.state.usersBooks}
                   routerProps={routerProps} />
               );
             }}
