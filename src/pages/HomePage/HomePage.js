@@ -1,6 +1,7 @@
 import React from 'react';
 import "./HomePage.scss";
 import { Link } from "react-router-dom";
+import Footer from "../../components/Footer/Footer.js";
 
 class HomePage extends React.Component {
 
@@ -93,6 +94,7 @@ class HomePage extends React.Component {
 
             </ul>
           </div>
+          <Footer/>
 
         </>
       );
