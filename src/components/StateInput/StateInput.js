@@ -56,7 +56,7 @@ class StateInput extends React.Component {
             const newFilteredBook = books.find(book => bookId == book.primary_isbn10);
 
 
-            axios.post("http://localhost:8080/books", {
+            axios.post('https://bookworm-capstone-api.herokuapp.com/books', {
                 author: newFilteredBook.author,
                 status: event.target.value,
                 book_image: newFilteredBook.book_image,

@@ -21,7 +21,7 @@ class UserBookPage extends React.Component {
     const bookId = this.props.routerProps.match.params.bookId;
 
 
-    const booksRequest = await axios.get("http://localhost:8080/books");
+    const booksRequest = await axios.get('https://bookworm-capstone-api.herokuapp.com/books');
 
     const books = booksRequest.data;
 
@@ -57,7 +57,7 @@ class UserBookPage extends React.Component {
     const bookId = this.props.routerProps.match.params.bookId;
 
 
-    const booksRequest = await axios.get("http://localhost:8080/books");
+    const booksRequest = await axios.get('https://bookworm-capstone-api.herokuapp.com/books');
 
     const books = booksRequest.data;
 
@@ -78,7 +78,7 @@ class UserBookPage extends React.Component {
     const userId = this.props.routerProps.match.params.id;
     const bookId = this.props.routerProps.match.params.bookId;
 
-    await axios.delete(`http://localhost:8080/users/${userId}/${bookId}`)
+    await axios.delete(`https://bookworm-capstone-api.herokuapp.com/users/${userId}/${bookId}`)
 
     this.props.routerProps.history.push(`/users/${userId}`)
 

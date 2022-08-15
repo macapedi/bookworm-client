@@ -13,7 +13,7 @@ class Login extends Component {
     handleSubmit = (event) => {
         event.preventDefault();
         axios
-            .post("http://localhost:8080/users/login", {
+            .post('https://bookworm-capstone-api.herokuapp.com/users/login', {
                 email: event.target.email.value,
                 password: event.target.password.value,
             })

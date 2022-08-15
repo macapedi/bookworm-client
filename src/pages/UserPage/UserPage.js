@@ -22,7 +22,7 @@ class UserPage extends React.Component {
   async componentDidMount() {
 
     const userId = this.props.routerProps.match.params.id;
-    const userBookListReq = await axios.get(`http://localhost:8080/users/${userId}`, { headers: {
+    const userBookListReq = await axios.get(`https://bookworm-capstone-api.herokuapp.com/users/${userId}`, { headers: {
       Authorization: `Bearer ${sessionStorage.getItem('token')}`,
     }});
 
@@ -58,7 +58,7 @@ class UserPage extends React.Component {
 
 
     if (userId !== prevState.currentUser) {
-      const userBookListReq = await axios.get(`http://localhost:8080/users/${userId}`, { headers: {
+      const userBookListReq = await axios.get(`https://bookworm-capstone-api.herokuapp.com/users/${userId}`, { headers: {
         Authorization: `Bearer ${sessionStorage.getItem('token')}`,
       }});
 
