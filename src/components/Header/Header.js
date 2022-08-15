@@ -4,6 +4,7 @@ import React from "react";
 import "./Header.scss";
 import avatar from "../../assets/images/avatar.png";
 import jwt_decode from "jwt-decode";
+import superWorm from "../../assets/images/superWorm.png"
 
 
 class Header extends React.Component {
@@ -77,7 +78,7 @@ class Header extends React.Component {
           </Link>
           {this.props.loggedIn &&
             <div className="avatar__container">
-              <img className="avatar" src={avatar}></img>
+              <img className="avatar" src={superWorm}></img>
               <Link onClick={this.handleLogout} className="avatar__logout-link">Logout</Link>
             </div>
           }
