@@ -102,7 +102,7 @@ class Header extends React.Component {
               <span className="header__nav-link-text">Public Shelves</span>
             </Link>
             <div className="avatar-tablet__container">
-              <img className="avatar-tablet" src={avatar}></img>
+              <img className="avatar-tablet" src={superWorm}></img>
               <Link onClick={this.handleLogout} className="avatar-tablet__logout-link">Logout</Link>
             </div>
 
