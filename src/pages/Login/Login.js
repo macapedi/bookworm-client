@@ -51,7 +51,6 @@ class Login extends Component {
                             Need an account? <Link to="/signup">Sign up</Link>
                         </p>
                     </form>
-
                 </div>
             </main>
         );
