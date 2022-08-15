@@ -15,7 +15,32 @@ class UserBookPage extends React.Component {
   }
 
 
-  async componentDidMount() {
+  componentDidMount() {
+
+    this.getSingleBook();
+
+  }
+  async componentDidUpdate(_prevProps, prevState) {
+
+//     const userId = this.props.routerProps.match.params.id;
+//     const bookId = this.props.routerProps.match.params.bookId;
+
+// if(this.state.singleUserBook.notes !== prevState.singleUserBook.notes){
+//     const booksRequest = await axios.get("http://localhost:8080/books");
+
+//     const books = booksRequest.data;
+
+//     const singleUserBook = books.filter((book) => book.user_id == userId && bookId == book.primary_isbn10);
+
+//     this.setState({
+//       singleUserBook: singleUserBook[0]
+//     })
+
+//   }
+}
+
+getSingleBook = async ()=>{
+  console.log("this runned");
 
     const userId = this.props.routerProps.match.params.id;
     const bookId = this.props.routerProps.match.params.bookId;
@@ -30,24 +55,7 @@ class UserBookPage extends React.Component {
     this.setState({
       singleUserBook: singleUserBook[0]
     })
-
-  }
-  // async componentDidUpdate() {
-  //   const userId = this.props.routerProps.match.params.id;
-  //   const bookId = this.props.routerProps.match.params.bookId;
-
-
-  //   const booksRequest = await axios.get("http://localhost:8080/books");
-
-  //   const books = booksRequest.data;
-
-  //   const singleUserBook = books.filter((book) => book.user_id == userId && bookId == book.primary_isbn10);
-
-  //   this.setState({
-  //     singleUserBook: singleUserBook[0]
-  //   })
-
-  // }
+}
 
 
 
@@ -90,12 +98,12 @@ class UserBookPage extends React.Component {
 
   render() {
 
-    console.log(this.props.routerProps.match.path);
+   
 
     const userId = this.props.routerProps.match.params.id;
 
     const tokenDecoded = jwt_decode(sessionStorage.getItem('token'));
-    console.log(tokenDecoded);
+  
 
     const currentUserId = tokenDecoded.id; // 
     const bookId = this.props.routerProps.match.params.bookId;
@@ -103,7 +111,7 @@ class UserBookPage extends React.Component {
     if (this.state.singleUserBook !== "") {
 
 
-      const { book_image, author, description, primary_isbn10, title, rank } = this.state.singleUserBook;
+      const { book_image, author, description, primary_isbn10, title, rank, notes } = this.state.singleUserBook;
 
 
 
@@ -126,7 +134,7 @@ class UserBookPage extends React.Component {
 
                   <p className='first-word'>Notes:</p>
                   <div onClick={this.editHandleButton} className='book-details__notes-container'>
-                    <p className='user-book-details__notes'>{this.state.singleUserBook.notes}</p>
+                    <p className='user-book-details__notes'>{notes}</p>
                   </div>
                 </div>
 

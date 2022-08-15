@@ -8,6 +8,7 @@ import deleteIcon from '../../assets/icons/delete.svg';
 import editIcon from '../../assets/icons/edit.svg';
 import saveIcon from '../../assets/icons/save.svg';
 import cancelIcon from '../../assets/icons/cancel.svg';
+import jwt_decode from 'jwt-decode';
 
 class UserBookPageEdit extends React.Component {
     state = {
@@ -79,6 +80,7 @@ class UserBookPageEdit extends React.Component {
 
 
     notesClickHandler = async (e) => {
+        e.preventDefault();
         const userId = this.props.routerProps.match.params.id;
         const bookId = this.props.routerProps.match.params.bookId;
         const singleUserBook = this.state.singleUserBook;
@@ -96,11 +98,14 @@ class UserBookPageEdit extends React.Component {
                 rank: singleUserBook.rank,
                 title: singleUserBook.title,
                 notes: this.state.notes,
+            }).then(()=>{
+                this.props.routerProps.history.push(`/users/${userId}/${bookId}`)
             })
         } catch {
             console.log("error");
         }
-        this.props.routerProps.history.push(`/users/${userId}/${bookId}`)
+
+
     }
 
 
@@ -120,8 +125,10 @@ class UserBookPageEdit extends React.Component {
     render() {
 
         const userId = this.props.routerProps.match.params.id;
-        const currentUserId = "8";
+        const tokenDecoded = jwt_decode(sessionStorage.getItem('token'));
 
+
+        const currentUserId = tokenDecoded.id;
         if (this.state.singleUserBook) {
 
 
@@ -130,35 +137,35 @@ class UserBookPageEdit extends React.Component {
 
 
             return (
-                <>       
-                <div className='book-details'>
-                    <div className='book-details__container'>
-                        <img src={book_image} alt={title} className="book-details__image"></img>
-                        <div>
-                            <div className='book-details_text-wrapper'>
-                                <p className='first-word'>Title: <span>{title}</span></p>
-                                <p className='first-word'>Author: <span>{author}</span></p>
-                                <p className='first-word'>Description: <span>{description}</span></p>
+                <>
+                    <div className='book-details'>
+                        <div className='book-details__container'>
+                            <img src={book_image} alt={title} className="book-details__image"></img>
+                            <div>
+                                <div className='book-details_text-wrapper'>
+                                    <p className='first-word'>Title: <span>{title}</span></p>
+                                    <p className='first-word'>Author: <span>{author}</span></p>
+                                    <p className='first-word'>Description: <span>{description}</span></p>
 
-                                {userId == currentUserId && <ShelveInput shelveChangeHandler={this.shelveChangeHandler} routerProps={this.props.routerProps} singleUserBook={this.state.singleUserBook} />}
+                                    {userId == currentUserId && <ShelveInput shelveChangeHandler={this.shelveChangeHandler} routerProps={this.props.routerProps} singleUserBook={this.state.singleUserBook} />}
+                                </div>
+                                <div className='book-details__notes-bigcontainer'>
+                                    <p className='first-word'>Notes:</p>
+
+                                    <form>
+                                        <div className='book-details__notes-container'>
+                                            <textarea onChange={this.notesChangeHandler} className='book-details__notes-editor' name="notes" value={this.state.notes}></textarea>
+                                        </div>
+                                        <div className='book-details__button-container'>
+                                            <button onClick={this.notesClickHandler} className="button"><img src={saveIcon} alt="save icon" className='icon'></img>Save</button>
+                                            <button onClick={this.cancelButtonHandler} className="button"><img className='icon' src={cancelIcon} alt="cancel icon"></img>Cancel</button>
+                                        </div>
+                                    </form>
+                                </div>
+
                             </div>
-                            <div className='book-details__notes-bigcontainer'>
-                                <p className='first-word'>Notes:</p>
-
-                                <form>
-                                    <div className='book-details__notes-container'>
-                                        <textarea onChange={this.notesChangeHandler} className='book-details__notes-editor' name="notes" value={this.state.notes}></textarea>
-                                    </div>
-                                    <div className='book-details__button-container'>
-                                        <button onClick={this.notesClickHandler} className="button"><img src={saveIcon} alt="save icon" className='icon'></img>Save</button>
-                                        <button onClick={this.cancelButtonHandler} className="button"><img className='icon' src={cancelIcon} alt="cancel icon"></img>Cancel</button>
-                                    </div>
-                                </form>
-                            </div>
-
                         </div>
                     </div>
-                </div>
                 </>
             );
         } else {
