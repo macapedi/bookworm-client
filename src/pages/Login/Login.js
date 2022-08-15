@@ -18,15 +18,27 @@ class Login extends Component {
                 password: event.target.password.value,
             })
             .then((response) => {
+
+                this.props.loginHandler();
+
                 sessionStorage.setItem("token", response.data.token);
-                this.setState({ success: true });
+
+                console.log("logged in")
+                this.props.routerProps.history.push("/books");
+
+               
+                // this.setState({ success: true });
+                
+
             })
             .catch((error) => {
                 this.setState({ error: error.response ? error.response.data : error.message });
             });
+        
     };
 
     render() {
+
         return (
             <main className="login-page">
                 <div className="login-page__wrapper">
@@ -46,7 +58,7 @@ class Login extends Component {
                         <Input type="password" name="password" label="Password" />
 
                         <button className="login__button">Log in</button>
-                        {this.state.success && <Redirect to="/books" />}
+                        {/* {this.state.success && <Redirect to="/books" />} */}
                         <p>
                             Need an account? <Link to="/signup">Sign up</Link>
                         </p>

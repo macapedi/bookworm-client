@@ -12,6 +12,7 @@ import UserBookPage from './pages/UserBookPage/UserBookPage';
 import UserBookPageEdit from './pages/UserBookPageEdit/UserBookPageEdit';
 import Login from './pages/Login/Login';
 import Signup from './pages/Signup/Singup';
+import jwt_decode from 'jwt-decode';
 
 
 
@@ -22,32 +23,34 @@ class App extends React.Component {
     usersList: "",
     usersBooks: "",
     booksList: [],
-    list: []
+    list: [],
+    loggedIn: false,
+    failedAuth: true
 
   }
 
   async componentDidMount() {
-    
+
+
+    let token = this.getToken();
+    console.log(token);
+    if (token) {
+      this.setState({
+        loggedIn: true
+      })
+    }
 
     const url = 'https://api.nytimes.com/svc/books/v3/lists/current/hardcover-fiction.json'
     const key = "?api-key=MPpcrAgZYL3NCtOTzOVpM9K9D4DJGWee"
     const response = await axios.get(`${url}${key}`)
     const booksList = response.data.results.books;
 
-
-
-
     //Data from json files
     const usersReq = await axios.get('https://bookworm-capstone-api.herokuapp.com/users');
     const usersResp = usersReq.data;
 
-
-
-
     const booksReq = await axios.get('https://bookworm-capstone-api.herokuapp.com/books');
     const booksResp = booksReq.data;
-
-
 
 
     this.setState({
@@ -62,16 +65,39 @@ class App extends React.Component {
 
   // async componentDidUpdate() {
 
-  //   const userId = this.props.routerProps.match.params.id;
-  //   const userBookListReq = await axios.get(`http://localhost:8080/users/${userId}`);
-
-  //   const userBookList = userBookListReq.data.inventoryBooks;
-
-  //   this.setState({
-  //     userBookList
-  //   })
+  //   let token = this.getToken();
+  //   console.log(token);
+  //   if (token) {
+  //     this.setState({
+  //       isLoggedIn: true
+  //     })
+  //   }
 
   // }
+
+  getToken = () => {
+    const token = sessionStorage.getItem('token');
+    return token;
+  }
+
+
+
+  logoutHandler = () => {
+   
+      this.setState({
+        loggedIn: false
+      })
+  }
+
+
+  loginHandler = () => {
+
+    console.log("this is triggered")
+      this.setState({
+        loggedIn: true
+      })
+  }
+
 
   statusChangeHandler = async () => {
 
@@ -97,7 +123,7 @@ class App extends React.Component {
     })
   }
 
-  handleNonFiction = async (date) =>{
+  handleNonFiction = async (date) => {
 
     const url = `https://api.nytimes.com/svc/books/v3/lists/${date}/hardcover-nonfiction.json`
     const key = "?api-key=MPpcrAgZYL3NCtOTzOVpM9K9D4DJGWee"
@@ -113,18 +139,26 @@ class App extends React.Component {
 
 
   render() {
-    
 
+console.log(this.state.loggedIn);
 
     return (
       <div className="App">
         <BrowserRouter>
-          <Header />
+          <Header loggedIn={this.state.loggedIn} logoutHandler={this.logoutHandler} />
           <Switch>
             <Route exact path="/">
               <Redirect to="/login" />
             </Route>
-            <Route path="/login" exact component={Login} />
+            <Route path="/login" exact render={(routerProps) => {
+              return (
+                <Login
+                routerProps={routerProps}
+                loginHandler={this.loginHandler}
+                />
+              );
+            }}
+            />
             <Route path="/signup">
               <Signup />
             </Route>
@@ -136,8 +170,8 @@ class App extends React.Component {
                   routerProps={routerProps}
                   handleFiction={this.handleFiction}
                   handleNonFiction={this.handleNonFiction}
-                  
-                  />
+
+                />
               );
             }}
             />

@@ -10,7 +10,6 @@ class Header extends React.Component {
 
 
   state = {
-    isLogedIn: false,
     currentUserId: null,
     isActiveMyShelve: false,
     isActivePublicShelve: false,
@@ -20,6 +19,7 @@ class Header extends React.Component {
   handleLogout = () => {
     sessionStorage.removeItem('token');
     console.log("token removed");
+    this.props.logoutHandler();
     this.props.history.push("/login");
   };
 
@@ -58,52 +58,57 @@ class Header extends React.Component {
     this.props.history.push(`/users/${currentUserId}`)
   }
 
+  getToken = () => {
+    const token = jwt_decode(sessionStorage.getItem('token'));
+    return token;
+  }
 
 
   render() {
+    console.log(this.props.loggedIn);
 
 
-    // const currentUserId = 8; // 
-
-    // 
+    
     return (
       <header className="header">
         <div className="header__logo-avatar-wrapper">
           <Link onClick={this.goToBooks} className="header__logo-link">
             <p className="header__logo"> BOOKWORM</p>
           </Link>
-          <div className="avatar__container">
-            <img className="avatar" src={avatar}></img>
-            <Link onClick={this.handleLogout} className="avatar__logout-link">Logout</Link>
-          </div>
+          {this.props.loggedIn &&
+            <div className="avatar__container">
+              <img className="avatar" src={avatar}></img>
+              <Link onClick={this.handleLogout} className="avatar__logout-link">Logout</Link>
+            </div>
+          }
         </div>
-        <nav className="header__nav-links">
-          <Link
-            onClick={this.getCurrentUserId}
-            className={"header__nav-link header__nav-link" +
-              (this.state.isActiveMyShelve ? "--selected" : "")
-            }
-          >
-            <span className="header__nav-link-text">My Shelves</span>
-          </Link>
-          <Link
-            onClick={this.goToPublicShelves}
-            className={"header__nav-link header__nav-link" +
-              (this.state.isActivePublicShelve ? "--selected" : "")
-            }
-          >
-            <span className="header__nav-link-text">Public Shelves</span>
-          </Link>
-          <div className="avatar-tablet__container">
-            <img className="avatar-tablet" src={avatar}></img>
-            <Link onClick={this.handleLogout} className="avatar-tablet__logout-link">Logout</Link>
-          </div>
+        {this.props.loggedIn &&
+          <nav className="header__nav-links">
+            <Link
+              onClick={this.getCurrentUserId}
+              className={"header__nav-link header__nav-link" +
+                (this.state.isActiveMyShelve ? "--selected" : "")
+              }
+            >
+              <span className="header__nav-link-text">My Shelves</span>
+            </Link>
+            <Link
+              onClick={this.goToPublicShelves}
+              className={"header__nav-link header__nav-link" +
+                (this.state.isActivePublicShelve ? "--selected" : "")
+              }
+            >
+              <span className="header__nav-link-text">Public Shelves</span>
+            </Link>
+            <div className="avatar-tablet__container">
+              <img className="avatar-tablet" src={avatar}></img>
+              <Link onClick={this.handleLogout} className="avatar-tablet__logout-link">Logout</Link>
+            </div>
 
-        </nav>
+          </nav>
+        }
       </header>
     );
-
-
   }
 }
 export default withRouter(Header);
