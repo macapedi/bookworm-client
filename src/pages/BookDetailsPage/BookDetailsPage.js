@@ -22,18 +22,7 @@ class BookDetailsPage extends React.Component {
 
 
 
-
-
-
-
-
-
-
-
   render() {
-
-
-
 
     if (this.props.booksList.length) {
 

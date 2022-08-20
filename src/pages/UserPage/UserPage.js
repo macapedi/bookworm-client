@@ -22,7 +22,7 @@ class UserPage extends React.Component {
   async componentDidMount() {
 
     const userId = this.props.routerProps.match.params.id;
-    const userBookListReq = await axios.get(`http://localhost:8080/users/${userId}`, { headers: {
+    const userBookListReq = await axios.get(`https://bookworm-capstone-api.herokuapp.com/users/${userId}`, { headers: {
       Authorization: `Bearer ${sessionStorage.getItem('token')}`,
     }});
 
@@ -33,8 +33,6 @@ class UserPage extends React.Component {
     const wishList = userBookList.filter((book) => book.status === "Wish List");
     const readingList = userBookList.filter((book) => book.status === "Reading");
     const droppedList = userBookList.filter((book) => book.status === "Dropped");
-
- 
 
 
     this.setState({
@@ -54,10 +52,8 @@ class UserPage extends React.Component {
     const userId = this.props.routerProps.match.params.id;
 
 
-
-
     if (userId !== prevState.currentUser) {
-      const userBookListReq = await axios.get(`http://localhost:8080/users/${userId}`, { headers: {
+      const userBookListReq = await axios.get(`https://bookworm-capstone-api.herokuapp.com/users/${userId}`, { headers: {
         Authorization: `Bearer ${sessionStorage.getItem('token')}`,
       }});
 
@@ -70,7 +66,6 @@ class UserPage extends React.Component {
       const droppedList = userBookList.filter((book) => book.status === "Dropped");
 
    
-
       this.setState({
         userBookList,
         finishedList,

@@ -51,7 +51,7 @@ class ShelveInput extends React.Component {
         try {
 
       
-            axios.put(`http://localhost:8080/users/${userId}/${bookId}`, {
+            axios.put(`https://bookworm-capstone-api.herokuapp.com/users/${userId}/${bookId}`, {
                 author: book.author,
                 status: event.target.value,
                 book_image: book.book_image,

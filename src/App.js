@@ -46,10 +46,10 @@ class App extends React.Component {
     const booksList = response.data.results.books;
 
     //Data from json files
-    const usersReq = await axios.get('http://localhost:8080/users');
+    const usersReq = await axios.get('https://bookworm-capstone-api.herokuapp.com/users');
     const usersResp = usersReq.data;
 
-    const booksReq = await axios.get('http://localhost:8080/books');
+    const booksReq = await axios.get('https://bookworm-capstone-api.herokuapp.com/books');
     const booksResp = booksReq.data;
 
 
@@ -96,11 +96,11 @@ class App extends React.Component {
 
     userId = tokenDecoded.id;
 
-    const usersReq = await axios.get('http://localhost:8080/users');
+    const usersReq = await axios.get('https://bookworm-capstone-api.herokuapp.com/users');
     const usersResp = usersReq.data;
 
 
-    const booksReq = await axios.get('http://localhost:8080/books');
+    const booksReq = await axios.get('https://bookworm-capstone-api.herokuapp.com/books');
     const booksResp = booksReq.data;
     this.setState({
       usersList: usersResp,
