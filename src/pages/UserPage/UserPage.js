@@ -83,12 +83,12 @@ class UserPage extends React.Component {
 
     
     const userId = this.props.routerProps.match.params.id;
-    const users = this.props.usersList;
+    // const users = this.props.usersList;
 
     if (this.props.usersList && this.state.userBookList) {
 
 
-      const singleUser = users.filter((user) => userId == user.id);
+      const singleUser = this.props.usersList.filter((user) => userId == user.id);
       const { name } = singleUser[0];
 
       return (
@@ -244,6 +244,9 @@ class UserPage extends React.Component {
           }
         </main>
       )
+    } else{
+      console.log("empty page loaded");
+      return (<p>Loading...</p>)
     }
 
   }

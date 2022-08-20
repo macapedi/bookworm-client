@@ -56,7 +56,10 @@ class Header extends React.Component {
 
       })
     }
-    this.props.history.push(`/users/${currentUserId}`)
+    // this.props.history.push(`/users/${currentUserId}`)
+    setTimeout(() => {
+      window.location.href = `/users/${currentUserId}`;
+    }, 100);
   }
 
   getToken = () => {
