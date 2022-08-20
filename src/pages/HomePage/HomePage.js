@@ -39,8 +39,7 @@ class HomePage extends React.Component {
 
 
   render() {
-    console.log(this.props.list)
-    console.log(this.state.date)
+   
 
     if (this.props.list.length) {
 

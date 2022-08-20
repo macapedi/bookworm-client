@@ -33,7 +33,7 @@ class App extends React.Component {
 
 
     let token = this.getToken();
-    console.log(token);
+
     if (token) {
       this.setState({
         loggedIn: true
@@ -46,10 +46,10 @@ class App extends React.Component {
     const booksList = response.data.results.books;
 
     //Data from json files
-    const usersReq = await axios.get('https://bookworm-capstone-api.herokuapp.com/users');
+    const usersReq = await axios.get('http://localhost:8080/users');
     const usersResp = usersReq.data;
 
-    const booksReq = await axios.get('https://bookworm-capstone-api.herokuapp.com/books');
+    const booksReq = await axios.get('http://localhost:8080/books');
     const booksResp = booksReq.data;
 
 
@@ -63,17 +63,7 @@ class App extends React.Component {
 
   };
 
-  // async componentDidUpdate() {
 
-  //   let token = this.getToken();
-  //   console.log(token);
-  //   if (token) {
-  //     this.setState({
-  //       isLoggedIn: true
-  //     })
-  //   }
-
-  // }
 
   getToken = () => {
     const token = sessionStorage.getItem('token');
@@ -83,35 +73,48 @@ class App extends React.Component {
 
 
   logoutHandler = () => {
-   
-      this.setState({
-        loggedIn: false
-      })
+
+    this.setState({
+      loggedIn: false
+    })
   }
 
 
   loginHandler = () => {
 
-    console.log("this is triggered")
-      this.setState({
-        loggedIn: true
-      })
+
+    this.setState({
+      loggedIn: true
+    })
   }
 
 
   statusChangeHandler = async () => {
+    let userId;
 
-    const usersReq = await axios.get('https://bookworm-capstone-api.herokuapp.com/users');
+    const tokenDecoded = jwt_decode(sessionStorage.getItem('token'));
+
+    userId = tokenDecoded.id;
+
+    const usersReq = await axios.get('http://localhost:8080/users');
     const usersResp = usersReq.data;
-    console.log(usersReq.data);
 
-    const booksReq = await axios.get('https://bookworm-capstone-api.herokuapp.com/books');
+
+    const booksReq = await axios.get('http://localhost:8080/books');
     const booksResp = booksReq.data;
     this.setState({
       usersList: usersResp,
       userBooks: booksResp,
     });
-  }
+    // console.log(this.props.routerProps);
+    // this.routerProps.history.push(`/users/${userId}`)
+    setTimeout(() => {
+      window.location.href = `/users/${userId}`;
+    }, 100);
+  };
+
+
+
   handleFiction = async (date) => {
     const url = `https://api.nytimes.com/svc/books/v3/lists/${date}/hardcover-fiction.json`
     const key = "?api-key=MPpcrAgZYL3NCtOTzOVpM9K9D4DJGWee"
@@ -121,7 +124,7 @@ class App extends React.Component {
       booksList,
       list: response.data.results.books,
     })
-  }
+  };
 
   handleNonFiction = async (date) => {
 
@@ -133,14 +136,14 @@ class App extends React.Component {
       booksList,
       list: response.data.results.books,
     })
-  }
+  };
 
 
 
 
   render() {
 
-console.log(this.state.loggedIn);
+
 
     return (
       <div className="App">
@@ -153,8 +156,8 @@ console.log(this.state.loggedIn);
             <Route path="/login" exact render={(routerProps) => {
               return (
                 <Login
-                routerProps={routerProps}
-                loginHandler={this.loginHandler}
+                  routerProps={routerProps}
+                  loginHandler={this.loginHandler}
                 />
               );
             }}
@@ -224,17 +227,13 @@ console.log(this.state.loggedIn);
               );
             }}
             />
-
-
-
-
           </Switch>
         </BrowserRouter>
-
       </div>
     );
 
   }
-}
+};
+
 
 export default App;

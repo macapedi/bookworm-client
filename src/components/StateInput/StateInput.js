@@ -45,7 +45,7 @@ class StateInput extends React.Component {
         let currentUserId;
 
         const tokenDecoded = jwt_decode(sessionStorage.getItem('token'));
-        console.log(tokenDecoded);
+     
         currentUserId = tokenDecoded.id;
 
 
@@ -56,7 +56,7 @@ class StateInput extends React.Component {
             const newFilteredBook = books.find(book => bookId == book.primary_isbn10);
 
 
-            axios.post('https://bookworm-capstone-api.herokuapp.com/books', {
+            axios.post('http://localhost:8080/books', {
                 author: newFilteredBook.author,
                 status: event.target.value,
                 book_image: newFilteredBook.book_image,
@@ -78,7 +78,7 @@ class StateInput extends React.Component {
     }
 
     render() {
-        console.log(this.props);
+        
 
 
         return (

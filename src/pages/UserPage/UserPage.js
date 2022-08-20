@@ -22,19 +22,19 @@ class UserPage extends React.Component {
   async componentDidMount() {
 
     const userId = this.props.routerProps.match.params.id;
-    const userBookListReq = await axios.get(`https://bookworm-capstone-api.herokuapp.com/users/${userId}`, { headers: {
+    const userBookListReq = await axios.get(`http://localhost:8080/users/${userId}`, { headers: {
       Authorization: `Bearer ${sessionStorage.getItem('token')}`,
     }});
 
     const userBookList = userBookListReq.data.inventoryBooks;
-    console.log(userBookList);
+
 
     const finishedList = userBookList.filter((book) => book.status === "Finished");
     const wishList = userBookList.filter((book) => book.status === "Wish List");
     const readingList = userBookList.filter((book) => book.status === "Reading");
     const droppedList = userBookList.filter((book) => book.status === "Dropped");
 
-    console.log(finishedList);
+ 
 
 
     this.setState({
@@ -53,24 +53,23 @@ class UserPage extends React.Component {
 
     const userId = this.props.routerProps.match.params.id;
 
-    console.log("this is user id", userId);
-    console.log("this is prevState", prevState);
+
 
 
     if (userId !== prevState.currentUser) {
-      const userBookListReq = await axios.get(`https://bookworm-capstone-api.herokuapp.com/users/${userId}`, { headers: {
+      const userBookListReq = await axios.get(`http://localhost:8080/users/${userId}`, { headers: {
         Authorization: `Bearer ${sessionStorage.getItem('token')}`,
       }});
 
       const userBookList = userBookListReq.data.inventoryBooks;
-      console.log(userBookList);
+ 
 
       const finishedList = userBookList.filter((book) => book.status === "Finished");
       const wishList = userBookList.filter((book) => book.status === "Wish List");
       const readingList = userBookList.filter((book) => book.status === "Reading");
       const droppedList = userBookList.filter((book) => book.status === "Dropped");
 
-      console.log(finishedList);
+   
 
       this.setState({
         userBookList,
@@ -86,13 +85,15 @@ class UserPage extends React.Component {
 
 
   render() {
+
+    
     const userId = this.props.routerProps.match.params.id;
     const users = this.props.usersList;
 
     if (this.props.usersList && this.state.userBookList) {
 
 
-      const singleUser = users.filter((user) => userId === user.id);
+      const singleUser = users.filter((user) => userId == user.id);
       const { name } = singleUser[0];
 
       return (

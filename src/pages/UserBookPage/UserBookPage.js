@@ -22,31 +22,32 @@ class UserBookPage extends React.Component {
   }
   async componentDidUpdate(_prevProps, prevState) {
 
-//     const userId = this.props.routerProps.match.params.id;
-//     const bookId = this.props.routerProps.match.params.bookId;
+    //     const userId = this.props.routerProps.match.params.id;
+    //     const bookId = this.props.routerProps.match.params.bookId;
 
-// if(this.state.singleUserBook.notes !== prevState.singleUserBook.notes){
-//     const booksRequest = await axios.get("http://localhost:8080/books");
+    // if(this.state.singleUserBook.notes !== prevState.singleUserBook.notes){
+    //     const booksRequest = await axios.get("http://localhost:8080/books");
 
-//     const books = booksRequest.data;
+    //     const books = booksRequest.data;
 
-//     const singleUserBook = books.filter((book) => book.user_id == userId && bookId == book.primary_isbn10);
+    //     const singleUserBook = books.filter((book) => book.user_id == userId && bookId == book.primary_isbn10);
 
-//     this.setState({
-//       singleUserBook: singleUserBook[0]
-//     })
+    //     this.setState({
+    //       singleUserBook: singleUserBook[0]
+    //     })
 
-//   }
-}
+    //   }
+  }
 
-getSingleBook = async ()=>{
-  console.log("this runned");
+  getSingleBook = async () => {
+
 
     const userId = this.props.routerProps.match.params.id;
     const bookId = this.props.routerProps.match.params.bookId;
 
 
-    const booksRequest = await axios.get('https://bookworm-capstone-api.herokuapp.com/books');
+    const booksRequest = await axios.get('http://localhost:8080/books');
+
 
     const books = booksRequest.data;
 
@@ -55,7 +56,7 @@ getSingleBook = async ()=>{
     this.setState({
       singleUserBook: singleUserBook[0]
     })
-}
+  }
 
 
 
@@ -65,10 +66,12 @@ getSingleBook = async ()=>{
     const bookId = this.props.routerProps.match.params.bookId;
 
 
-    const booksRequest = await axios.get('https://bookworm-capstone-api.herokuapp.com/books');
+    const booksRequest = await axios.get('http://localhost:8080/books');
+
+
 
     const books = booksRequest.data;
-
+ 
     const singleUserBook = books.filter((book) => book.user_id == userId && bookId == book.primary_isbn10);
 
     this.setState({
@@ -82,13 +85,16 @@ getSingleBook = async ()=>{
     this.props.routerProps.history.push(`/users/${userId}/${bookId}/edit`);
   }
 
-  deleteButtonHandler = async () => {
+  deleteButtonHandler = () => {
     const userId = this.props.routerProps.match.params.id;
     const bookId = this.props.routerProps.match.params.bookId;
 
-    await axios.delete(`https://bookworm-capstone-api.herokuapp.com/users/${userId}/${bookId}`)
-
-    this.props.routerProps.history.push(`/users/${userId}`)
+    try {
+      axios.delete(`http://localhost:8080/users/${userId}/${bookId}`)
+        .then(() => { this.props.routerProps.history.push(`/users/${userId}`) })
+    } catch {
+      console.log("error");
+    }
 
   }
 
@@ -98,12 +104,12 @@ getSingleBook = async ()=>{
 
   render() {
 
-   
+
 
     const userId = this.props.routerProps.match.params.id;
 
     const tokenDecoded = jwt_decode(sessionStorage.getItem('token'));
-  
+
 
     const currentUserId = tokenDecoded.id; // 
     const bookId = this.props.routerProps.match.params.bookId;

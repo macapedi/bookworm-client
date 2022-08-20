@@ -22,7 +22,7 @@ class UserBookPageEdit extends React.Component {
         const bookId = this.props.routerProps.match.params.bookId;
 
 
-        const booksRequest = await axios.get('https://bookworm-capstone-api.herokuapp.com/books');
+        const booksRequest = await axios.get('http://localhost:8080/books');
 
         const books = booksRequest.data;
 
@@ -59,7 +59,7 @@ class UserBookPageEdit extends React.Component {
         const bookId = this.props.routerProps.match.params.bookId;
 
 
-        const booksRequest = await axios.get('https://bookworm-capstone-api.herokuapp.com/books');
+        const booksRequest = await axios.get('http://localhost:8080/books');
 
         const books = booksRequest.data;
 
@@ -88,7 +88,7 @@ class UserBookPageEdit extends React.Component {
 
         try {
 
-            axios.put(`https://bookworm-capstone-api.herokuapp.com/users/${userId}/${bookId}`, {
+            axios.put(`http://localhost:8080/users/${userId}/${bookId}`, {
                 author: singleUserBook.author,
                 status: singleUserBook.status,
                 book_image: singleUserBook.book_image,
