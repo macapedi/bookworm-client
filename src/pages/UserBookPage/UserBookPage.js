@@ -71,7 +71,7 @@ class UserBookPage extends React.Component {
 
 
     const books = booksRequest.data;
- 
+
     const singleUserBook = books.filter((book) => book.user_id == userId && bookId == book.primary_isbn10);
 
     this.setState({
@@ -80,7 +80,10 @@ class UserBookPage extends React.Component {
   }
 
   editHandleButton = () => {
-    const userId = this.props.routerProps.match.params.id;
+    let userId;
+    const tokenDecoded = jwt_decode(sessionStorage.getItem('token'));
+    userId = tokenDecoded.id;
+
     const bookId = this.props.routerProps.match.params.bookId;
     this.props.routerProps.history.push(`/users/${userId}/${bookId}/edit`);
   }
@@ -105,16 +108,12 @@ class UserBookPage extends React.Component {
   render() {
 
 
-
-    const userId = this.props.routerProps.match.params.id;
-
-    const tokenDecoded = jwt_decode(sessionStorage.getItem('token'));
-
-
-    const currentUserId = tokenDecoded.id; // 
-    const bookId = this.props.routerProps.match.params.bookId;
-
     if (this.state.singleUserBook !== "") {
+      const userId = this.props.routerProps.match.params.id;
+
+      const tokenDecoded = jwt_decode(sessionStorage.getItem('token'));
+      const currentUserId = tokenDecoded.id; // 
+      const bookId = this.props.routerProps.match.params.bookId;
 
 
       const { book_image, author, description, primary_isbn10, title, rank, notes } = this.state.singleUserBook;
@@ -139,7 +138,7 @@ class UserBookPage extends React.Component {
                 <div className='user-book-details__notes-bigcontainer'>
 
                   <p className='first-word'>Notes:</p>
-                  <div onClick={this.editHandleButton} className='book-details__notes-container'>
+                  <div onClick={userId == currentUserId && this.editHandleButton} className='book-details__notes-container'>
                     <p className='user-book-details__notes'>{notes}</p>
                   </div>
                 </div>
