@@ -82,11 +82,11 @@ class UserPage extends React.Component {
   render() {
 
     
-    const userId = this.props.routerProps.match.params.id;
+   
     // const users = this.props.usersList;
 
     if (this.props.usersList && this.state.userBookList) {
-
+      const userId = this.props.routerProps.match.params.id;
 
       const singleUser = this.props.usersList.filter((user) => userId == user.id);
       const { name } = singleUser[0];
